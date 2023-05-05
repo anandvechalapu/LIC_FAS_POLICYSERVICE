@@ -1,45 +1,38 @@
-package com.lic.epgs.policyservicing.common.commoncontroller.model;
+package com.lic.epgs.policyservicing.common.commoncontroller.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import com.lic.epgs.policyservicing.common.commoncontroller.dto.PolicyServiceCommonResponseDto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface PolicyServicingCommonRepository extends CrudRepository<PolicyServiceEntity, Long> {
+@Repository
+public interface PolicyServicingCommonRepository extends JpaRepository<PolicyServiceCommonResponseDto, Long> {
 
-    Long getSequence();
+    @Query("SELECT p FROM PolicyServiceCommonResponseDto p WHERE p.policyId = ?1")
+    PolicyServiceCommonResponseDto getServiceDetailsByPolicyId(Long policyId);
 
-    PolicyServiceEntity findByPolicyIdAndServiceType(String policyId, String serviceType);
 }
 
 package com.lic.epgs.policyservicing.common.commoncontroller.controller;
 
+import com.lic.epgs.policyservicing.common.commoncontroller.dto.PolicyServiceCommonResponseDto;
+import com.lic.epgs.policyservicing.common.commoncontroller.service.PolicyServicingCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.policyservicing.common.commoncontroller.model.PolicyServiceEntity;
-import com.lic.epgs.policyservicing.common.commoncontroller.service.PolicyServicingCommonService;
-
 @RestController
+@RequestMapping("/policyServicing")
 public class PolicyServicingCommonController {
 
     @Autowired
     private PolicyServicingCommonService policyServicingCommonService;
 
-    @GetMapping("/sequence")
-    public Long getSequence() {
-        return policyServicingCommonService.getSequence();
-    }
-
-    @GetMapping("/policy/{policyId}/{serviceType}")
-    public PolicyServiceEntity findByPolicyIdAndServiceType(@PathVariable("policyId") String policyId,
-            @PathVariable("serviceType") String serviceType) {
-        return policyServicingCommonService.findByPolicyIdAndServiceType(policyId, serviceType);
-    }
-
-    @PostMapping(value = "/policy")
-    public PolicyServiceEntity savePolicyServiceEntity(PolicyServiceEntity policyServiceEntity) {
-        return policyServicingCommonService.save(policyServiceEntity);
+    @GetMapping("/{policyId}")
+    public PolicyServiceCommonResponseDto getServiceDetailsByPolicyId(@PathVariable Long policyId) {
+        return policyServicingCommonService.getServiceDetailsByPolicyId(policyId);
     }
 
 }

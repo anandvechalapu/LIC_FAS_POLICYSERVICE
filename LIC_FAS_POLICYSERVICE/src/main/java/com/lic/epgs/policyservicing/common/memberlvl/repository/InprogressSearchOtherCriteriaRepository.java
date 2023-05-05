@@ -1,13 +1,16 @@
-@Repository
-public interface InprogressSearchOtherCriteriaRepository {
+package com.lic.epgs.policyservicing.common.memberlvl.repository;
 
-    /**
-     * This method is used to perform a search for commissions that are in progress 
-     * using other criteria besides the default search parameters.
-     *
-     * @param commissionSearchDto The CommissionSearchDto object passed in the request body should contain the necessary search criteria required to perform the search.
-     * @param role The role parameter passed in the request should contain the user's role information.
-     * @return ResponseEntity<CommonCommissionDto> The response should contain the commission information that matches the search criteria.
-     */
-    ResponseEntity<CommonCommissionDto> inprogressSearchOtherCriteria(CommissionSearchDto commissionSearchDto, String role);
+import com.lic.epgs.policyservicing.common.memberlvl.dto.CommonCommissionDto;
+import com.lic.epgs.policyservicing.common.memberlvl.dto.CommissionSearchDto;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface InprogressSearchOtherCriteriaRepository extends JpaRepository<CommonCommissionDto, Long> {
+
+    @Query("SELECT c FROM CommonCommissionDto c WHERE c.role = :role AND c.searchCriteria = :searchCriteria")
+    CommonCommissionDto inprogressSearchOtherCriteria(String role, CommissionSearchDto searchCriteria);
+
 }

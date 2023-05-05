@@ -1,47 +1,69 @@
+package com.lic.epgs.policyservicing.common.memberlvl.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+
+import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionDetailsEntity;
+import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionEntity;
+
 @Repository
-public class GetInprogressLoadRepository {
+public class CommissionRepository {
 
-    private final Logger logger = LoggerFactory.getLogger(GetInprogressLoadRepository.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommissionRepository.class);
 
-    @Autowired
-    private EntityManager entityManager;
+    @PersistenceContext
+    EntityManager entityManager;
 
-    public TransferInAndOutResponseDto getInprogressLoad(String role, String unitCode) {
-        TransferInAndOutResponseDto responseDto = new TransferInAndOutResponseDto();
-        try {
-            if(role == null || role.isBlank() || unitCode == null || unitCode.isBlank()) {
-                return responseDto;
-            }
-            logger.info("Starting getInprogressLoad with role: {}, unitCode: {}", role, unitCode);
-            String queryString = "";
-            if(role.equals("checker")) {
-                queryString = "select * from transfers where transfer_status = 'in-progress-checker' and unit_code = :unitCode order by modified_date desc";
-            } else if(role.equals("maker")) {
-                queryString = "select * from transfers where transfer_status = 'in-progress-maker' and unit_code = :unitCode order by modified_date desc";
-            }
-            Query query = entityManager.createNativeQuery(queryString, Transfer.class);
-            query.setParameter("unitCode", unitCode);
-            List<Transfer> transfers = query.getResultList();
-            if(transfers.isEmpty()) {
-                responseDto.setTransactionMessage("No record found");
-                responseDto.setTransactionStatus("Fail");
-            } else {
-                List<TransferInAndOutDto> transferInAndOutDtos = new ArrayList<>();
-                for(Transfer transfer : transfers) {
-                    transferInAndOutDtos.add(mapToTransferInAndOutDto(transfer));
-                }
-                responseDto.setData(transferInAndOutDtos);
-            }
-            logger.info("Ending getInprogressLoad with role: {}, unitCode: {}", role, unitCode);
-        } catch(Exception e) {
-            logger.error("Exception while executing getInprogressLoad with role: {}, unitCode: {}", role, unitCode, e);
-            responseDto.setTransactionMessage(e.getMessage());
-            responseDto.setTransactionStatus("Fail");
-        }
-        return responseDto;
+    public List<CommissionEntity> getInprogressLoad(String role, String unitCode) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<CommissionEntity> criteria = builder.createQuery(CommissionEntity.class);
+        Root<CommissionEntity> root = criteria.from(CommissionEntity.class);
+        criteria.select(root);
+        criteria.where(builder.equal(root.get("role"), role), builder.equal(root.get("unitCode"), unitCode));
+        Query query = entityManager.createQuery(criteria);
+        return query.getResultList();
     }
 
-    private TransferInAndOutDto mapToTransferInAndOutDto(Transfer transfer) {
-        // implement mapping from Transfer to TransferInAndOutDto
+    public List<CommissionEntity> getInprogressMakerLoad(String role, String unitCode) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<CommissionEntity> criteria = builder.createQuery(CommissionEntity.class);
+        Root<CommissionEntity> root = criteria.from(CommissionEntity.class);
+        criteria.select(root);
+        criteria.where(builder.equal(root.get("role"), role), builder.equal(root.get("unitCode"), unitCode));
+        Query query = entityManager.createQuery(criteria);
+        return query.getResultList();
+    }
+
+    public Optional<CommissionEntity> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(CommissionEntity.class, id));
+    }
+
+    public CommissionEntity save(CommissionEntity commissionEntity) {
+        entityManager.persist(commissionEntity);
+        return commissionEntity;
+    }
+
+    public void delete(CommissionEntity commissionEntity) {
+        entityManager.remove(commissionEntity);
+    }
+
+    public CommissionDetailsEntity saveCommissionDetails(CommissionDetailsEntity commissionDetailsEntity) {
+        entityManager.persist(commissionDetailsEntity);
+        return commissionDetailsEntity;
+    }
+
+    public void deleteCommissionDetails(CommissionDetailsEntity commissionDetailsEntity) {
+        entityManager.remove(commissionDetailsEntity);
     }
 }

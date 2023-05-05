@@ -1,22 +1,28 @@
 @Repository
-public interface PolicyLevelConversionCheckerControllerRepository extends JpaRepository<PolicyLevelConversionTempEntity, Long> {
+public interface PolicyLevelConversionCheckerControllerRepository {
+    
+    // Method to perform existing common search using various search parameters
+    public List<PolicyConversion> existingCommonSearch(String mphCode, String mphName, String status, String product, String unitCode, int pageCount, int limit);
+    
+    // Method to set transaction status
+    public void setStatus(String status);
 
-    @Query("UPDATE PolicyLevelConversionTempEntity SET conversionStatus= 'Active' WHERE conversionId = :conversionId")
-    void updateConversionStatus(@Param("conversionId") Long conversionId);
+    // Method to set transaction message
+    public void setMessage(String message);
 
-    @Query("UPDATE PolicyLevelConversionTempEntity SET conversionWorkflowStatus= 'Approved', modifiedBy = :modifiedBy, modifiedOn = CURRENT_DATE WHERE conversionId = :conversionId")
-    void updateConversionWorkflowStatus(@Param("conversionId") Long conversionId, @Param("modifiedBy") String modifiedBy);
+    // Method to set default limit of 5000 records
+    public void setDefaultLimit(int limit);
 
-    @Query("SELECT p FROM PolicyLevelConversionTempEntity p WHERE prevPolicyId = :prevPolicyId")
-    PolicyLevelConversionEntity checkIfExists(@Param("prevPolicyId") Long prevPolicyId);
+    // Method to set default page count of 0
+    public void setDefaultPageCount(int pageCount);
 
-    @Query("INSERT INTO PolicyLevelConversionEntity (field1, field2, ..., fieldN) SELECT field1, field2, ..., fieldN FROM PolicyLevelConversionTempEntity WHERE conversionId = :conversionId")
-    void saveNewPolicyLevelConversionEntity(@Param("conversionId") Long conversionId);
+    // Method to sort the results in descending order by the createdOn field
+    public void sortByCreatedOn();
 
-    @Query("INSERT INTO PolicyServiceDocumentEntity (field1, field2, ..., fieldN) SELECT field1, field2, ..., fieldN FROM PolicyServiceDocumentTempEntity WHERE conversionId = :conversionId")
-    void saveNewPolicyServiceDocumentEntity(@Param("conversionId") Long conversionId);
+    // Method to ignore blank search parameters
+    public void ignoreBlankSearchParameters();
 
-    @Query("INSERT INTO PolicyServiceNotesEntity (field1, field2, ..., fieldN) SELECT field1, field2, ..., fieldN FROM PolicyServiceNotesTempEntity WHERE serviceId = :serviceId")
-    void saveNewPolicyServiceNotesEntity(@Param("serviceId") Long serviceId);
+    // Method to return error transaction status and message
+    public void returnErrorTransactionStatusAndMessage();
 
 }

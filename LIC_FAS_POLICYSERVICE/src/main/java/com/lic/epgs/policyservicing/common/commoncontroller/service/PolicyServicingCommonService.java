@@ -1,20 +1,19 @@
 package com.lic.epgs.policyservicing.common.commoncontroller.service;
 
-import com.lic.epgs.policyservicing.common.commoncontroller.dto.PolicyServiceCommonResponseDto;
 import com.lic.epgs.policyservicing.common.commoncontroller.repository.PolicyServicingCommonRepository;
+import com.lic.epgs.policyservicing.common.commoncontroller.model.ServiceDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PolicyServicingCommonService {
-
-    private final PolicyServicingCommonRepository policyServicingCommonRepository;
-
-    public PolicyServicingCommonService(PolicyServicingCommonRepository policyServicingCommonRepository) {
-        this.policyServicingCommonRepository = policyServicingCommonRepository;
+ 
+    @Autowired
+    private PolicyServicingCommonRepository policyServicingCommonRepository;
+ 
+    public Optional<ServiceDetails> getServiceDetailsById(Long serviceId) {
+        return policyServicingCommonRepository.findById(serviceId);
     }
-
-    public PolicyServiceCommonResponseDto getServiceDetailsByPolicyId(Long policyId) {
-        return policyServicingCommonRepository.getServiceDetailsByPolicyId(policyId);
-    }
-
 }

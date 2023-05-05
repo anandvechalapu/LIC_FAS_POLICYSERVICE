@@ -1,127 +1,96 @@
 package com.lic.epgs.policyservicing.common.memberlvl.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.springframework.http.ResponseEntity;
 
 public class CommissionDto {
 
-    private Long commissionId;
-    private String role;
+    @JsonProperty("commissionId")
+    private Integer commissionId;
 
-    public Long getCommissionId() {
+    @JsonProperty("planId")
+    private Integer planId;
+
+    @JsonProperty("levelId")
+    private Integer levelId;
+
+    @JsonProperty("levelName")
+    private String levelName;
+
+    @JsonProperty("commissionType")
+    private String commissionType;
+
+    @JsonProperty("commissionAmount")
+    private Float commissionAmount;
+
+    @JsonProperty("startDate")
+    private String startDate;
+
+    @JsonProperty("endDate")
+    private String endDate;
+
+    public Integer getCommissionId() {
         return commissionId;
     }
 
-    public void setCommissionId(Long commissionId) {
+    public void setCommissionId(Integer commissionId) {
         this.commissionId = commissionId;
     }
 
-    public String getRole() {
-        return role;
+    public Integer getPlanId() {
+        return planId;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setPlanId(Integer planId) {
+        this.planId = planId;
     }
 
-}
-
-public class CommissionTemp {
-
-    private Long commissionId;
-    private String status;
-
-    public Long getCommissionId() {
-        return commissionId;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setCommissionId(Long commissionId) {
-        this.commissionId = commissionId;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getLevelName() {
+        return levelName;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
     }
 
-}
-
-public class Commission {
-
-    private Long commissionId;
-    private String status;
-
-    public Long getCommissionId() {
-        return commissionId;
+    public String getCommissionType() {
+        return commissionType;
     }
 
-    public void setCommissionId(Long commissionId) {
-        this.commissionId = commissionId;
+    public void setCommissionType(String commissionType) {
+        this.commissionType = commissionType;
     }
 
-    public String getStatus() {
-        return status;
+    public Float getCommissionAmount() {
+        return commissionAmount;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCommissionAmount(Float commissionAmount) {
+        this.commissionAmount = commissionAmount;
     }
 
-}
-
-public class CommissionQuestionDetails {
-
-    private Long commissionId;
-    private String question;
-    private String answer;
-
-    public Long getCommissionId() {
-        return commissionId;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setCommissionId(Long commissionId) {
-        this.commissionId = commissionId;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-}
-
-public class CommissionNotes {
-
-    private Long commissionId;
-    private String note;
-
-    public Long getCommissionId() {
-        return commissionId;
-    }
-
-    public void setCommissionId(Long commissionId) {
-        this.commissionId = commissionId;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
 }

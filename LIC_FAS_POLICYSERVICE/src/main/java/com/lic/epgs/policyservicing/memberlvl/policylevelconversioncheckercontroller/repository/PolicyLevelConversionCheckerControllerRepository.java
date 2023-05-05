@@ -1,28 +1,19 @@
-@Repository
-public interface PolicyLevelConversionCheckerControllerRepository {
-    
-    // Method to perform existing common search using various search parameters
-    public List<PolicyConversion> existingCommonSearch(String mphCode, String mphName, String status, String product, String unitCode, int pageCount, int limit);
-    
-    // Method to set transaction status
-    public void setStatus(String status);
+package com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.repository;
 
-    // Method to set transaction message
-    public void setMessage(String message);
+import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.model.CommonResponseDto;
+import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.model.PolicyLevelConversionDto;
+import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.util.PolicyLevelConversionConstants;
 
-    // Method to set default limit of 5000 records
-    public void setDefaultLimit(int limit);
+import org.springframework.data.repository.CrudRepository;
 
-    // Method to set default page count of 0
-    public void setDefaultPageCount(int pageCount);
-
-    // Method to sort the results in descending order by the createdOn field
-    public void sortByCreatedOn();
-
-    // Method to ignore blank search parameters
-    public void ignoreBlankSearchParameters();
-
-    // Method to return error transaction status and message
-    public void returnErrorTransactionStatusAndMessage();
-
+public interface PolicyLevelConversionCheckerControllerRepository extends CrudRepository<PolicyLevelConversionDto, String> {
+    /**
+     * This method retrieves the existing policy details using the new policy number and the list of 
+     * PolicyLevelConversionConstants.
+     * 
+     * @param newPolicyNo The new policy number
+     * @return CommonResponseDto - The response object containing the policy details in the format of 
+     * PolicyLevelConversionDto 
+     */
+    CommonResponseDto getExistingDetailsByNewPolicyNo(String newPolicyNo);
 }

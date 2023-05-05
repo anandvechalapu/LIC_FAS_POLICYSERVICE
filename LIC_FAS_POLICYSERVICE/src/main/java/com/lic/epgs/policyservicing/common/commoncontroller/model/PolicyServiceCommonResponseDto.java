@@ -5,36 +5,32 @@ import javax.persistence.Id;
 
 @Entity
 public class PolicyServiceCommonResponseDto {
+    @Id
+    private Long policyId;
+    private String serviceName;
+    private String serviceDescription;
 
-	@Id
-	private Long policyId;
+    public Long getPolicyId() {
+        return policyId;
+    }
 
-	private String serviceType;
+    public void setPolicyId(Long policyId) {
+        this.policyId = policyId;
+    }
 
-	private String newServiceType;
+    public String getServiceName() {
+        return serviceName;
+    }
 
-	public Long getPolicyId() {
-		return policyId;
-	}
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
 
-	public void setPolicyId(Long policyId) {
-		this.policyId = policyId;
-	}
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
 
-	public String getServiceType() {
-		return serviceType;
-	}
-
-	public void setServiceType(String serviceType) {
-		this.serviceType = serviceType;
-	}
-
-	public String getNewServiceType() {
-		return newServiceType;
-	}
-
-	public void setNewServiceType(String newServiceType) {
-		this.newServiceType = newServiceType;
-	}
-
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
 }

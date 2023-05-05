@@ -1,45 +1,34 @@
 package com.lic.epgs.policyservicing.common.memberlvl.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionEntity;
-import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionDetailsEntity;
 import com.lic.epgs.policyservicing.common.memberlvl.service.CommissionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
+import java.util.List;
+
+@Controller
+@RequestMapping("/api/commission")
 public class CommissionController {
-	
-	@Autowired
-	private CommissionService commissionService;
-	
-	@GetMapping("/commission/inprogress")
-	public CommissionEntity getInprogressLoad(@RequestParam String role, @RequestParam String unitCode) {
-		return commissionService.getInprogressLoad(role, unitCode);
-	}
-	
-	@GetMapping("/commission/inprogressmaker")
-	public CommissionDetailsEntity getInprogressMakerLoad(@RequestParam String role, @RequestParam String unitCode) {
-		return commissionService.getInprogressMakerLoad(role, unitCode);
-	}
-	
-	@GetMapping("/commissions")
-	public List<CommissionEntity> getAllCommissions() {
-		return commissionService.getAllCommissions();
-	}
-	
-	@PostMapping("/commission")
-	public CommissionEntity saveCommission(@RequestBody CommissionEntity commission) {
-		return commissionService.saveCommission(commission);
-	}
-	
-	@PostMapping("/commissiondetails")
-	public CommissionDetailsEntity saveCommissionDetails(@RequestBody CommissionDetailsEntity commissionDetails) {
-		return commissionService.saveCommissionDetails(commissionDetails);
-	}
-	
+
+    @Autowired
+    private CommissionService commissionService;
+
+    @GetMapping("/inprogress")
+    public ResponseEntity<List<CommissionEntity>> getInprogressLoad(@RequestParam(name = "unitCode") String unitCode) {
+        List<CommissionEntity> commissionEntities = commissionService.getInprogressLoad(unitCode);
+        return new ResponseEntity<>(commissionEntities, HttpStatus.OK);
+    }
+
+    @GetMapping("/inprogress/maker")
+    public ResponseEntity<List<CommissionEntity>> getInprogressMakerLoad(@RequestParam(name = "unitCode") String unitCode) {
+        List<CommissionEntity> commissionEntities = commissionService.getInprogressMakerLoad(unitCode);
+        return new ResponseEntity<>(commissionEntities, HttpStatus.OK);
+    }
+
 }

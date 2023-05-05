@@ -1,23 +1,20 @@
 package com.lic.epgs.policyservicing.common.commoncontroller.service;
 
-import com.lic.epgs.policyservicing.common.commoncontroller.entity.PolicyServiceEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.lic.epgs.policyservicing.common.commoncontroller.dto.PolicyServiceCommonResponseDto;
 import com.lic.epgs.policyservicing.common.commoncontroller.repository.PolicyServicingCommonRepository;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PolicyServicingCommonService {
 
-    @Autowired
-    private PolicyServicingCommonRepository policyServicingCommonRepository;
+    private final PolicyServicingCommonRepository policyServicingCommonRepository;
 
-    public Long getSequence() {
-        return policyServicingCommonRepository.getSequence();
+    public PolicyServicingCommonService(PolicyServicingCommonRepository policyServicingCommonRepository) {
+        this.policyServicingCommonRepository = policyServicingCommonRepository;
     }
 
-    public PolicyServiceEntity findByPolicyIdAndServiceType(String policyId, String serviceType) {
-        return policyServicingCommonRepository.findByPolicyIdAndServiceType(policyId, serviceType);
+    public PolicyServiceCommonResponseDto getServiceDetailsByPolicyId(Long policyId) {
+        return policyServicingCommonRepository.getServiceDetailsByPolicyId(policyId);
     }
 
 }

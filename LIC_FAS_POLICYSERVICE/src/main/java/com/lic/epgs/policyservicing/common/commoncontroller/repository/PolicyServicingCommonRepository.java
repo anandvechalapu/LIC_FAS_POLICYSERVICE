@@ -1,6 +1,6 @@
 @Repository
-public interface PolicyServicingCommonRepository {
+public interface PolicyServicingCommonRepository extends JpaRepository<ServiceDetails, Long> {
 
-    PolicyServiceCommonResponseDto getServiceDetailsByPolicyId(Long policyId);
+    ServiceDetails findById(Long serviceId);
 
 }

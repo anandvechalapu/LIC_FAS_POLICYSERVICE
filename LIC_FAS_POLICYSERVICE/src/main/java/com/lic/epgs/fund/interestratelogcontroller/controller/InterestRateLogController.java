@@ -9,32 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lic.epgs.fund.interestratelogcontroller.model.InterestRateLog;
-import com.lic.epgs.fund.interestratelogcontroller.service.InterestRateLogControllerService;
+import com.lic.epgs.fund.interestratelogcontroller.service.InterestRateLogService;
 
 @RestController
-@RequestMapping("/InterestRateLog")
+@RequestMapping("/interestRateLogs")
 public class InterestRateLogController {
 
     @Autowired
-    private InterestRateLogControllerService interestRateLogControllerService;
+    private InterestRateLogService interestRateLogService;
 
-    @GetMapping("/failed")
-    public List<InterestRateLog> getFailedInterestRateLogs() {
-        return interestRateLogControllerService.findByIsFailTrueOrderByIdAsc();
+    @GetMapping("/errors/{memberId}")
+    public List<InterestRateLog> getErrorLogsByMemberId(@PathVariable Long memberId){
+        return interestRateLogService.findErrorLogsByMemberId(memberId);
     }
 
-    @GetMapping("/policy/{policyNo}")
-    public List<InterestRateLog> getInterestRateLogsByPolicyNo(@PathVariable String policyNo) {
-        return interestRateLogControllerService.findByPolicyNoOrderByIdAsc(policyNo);
-    }
-
-    @GetMapping("/reference/{referenceNo}")
-    public List<InterestRateLog> getInterestRateLogsByReferenceNo(@PathVariable String referenceNo) {
-        return interestRateLogControllerService.findByReferenceNoOrderByIdAsc(referenceNo);
-    }
-
-    @GetMapping
-    public List<InterestRateLog> getAllInterestRateLogs() {
-        return interestRateLogControllerService.findAllByOrderByIdAsc();
-    }
 }

@@ -1,7 +1,5 @@
 package com.lic.epgs.fund.interestfundcontroller.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,12 +7,12 @@ import javax.persistence.Id;
 
 @Entity
 public class Policy {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    private Long memberId;
-    private LocalDate date;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String policyNo;
+    private String policyStart;
 
     public Long getId() {
         return id;
@@ -24,20 +22,19 @@ public class Policy {
         this.id = id;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public String getPolicyNo() {
+        return policyNo;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setPolicyNo(String policyNo) {
+        this.policyNo = policyNo;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getPolicyStart() {
+        return policyStart;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setPolicyStart(String policyStart) {
+        this.policyStart = policyStart;
     }
-
 }

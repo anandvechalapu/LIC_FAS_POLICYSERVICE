@@ -1,30 +1,32 @@
+package com.lic.epgs.policyservicing.common.policyservicingcontroller.repository;
+
+import com.lic.epgs.policyservicing.common.policyservicingcontroller.dto.CommonResponseDto;
+import com.lic.epgs.policyservicing.common.policyservicingcontroller.dto.PolicyServiceDocumentDto;
+
+public interface PolicyServicingControllerRepository {
+    CommonResponseDto savePolicyServiceDocument(PolicyServiceDocumentDto policyServiceDocumentDto);
+}
+
 package com.lic.epgs.policyservicing.common.policyservicingcontroller.controller;
 
 import com.lic.epgs.policyservicing.common.policyservicingcontroller.dto.CommonResponseDto;
-import com.lic.epgs.policyservicing.common.policyservicingcontroller.dto.PolicyServiceDto;
-import com.lic.epgs.policyservicing.common.policyservicingcontroller.dto.PolicyServiceRequestDto;
-import com.lic.epgs.policyservicing.common.policyservicingcontroller.exceptions.ApplicationException;
-import com.lic.epgs.policyservicing.common.policyservicingcontroller.exceptions.RequiredFieldException;
-import com.lic.epgs.policyservicing.common.policyservicingcontroller.exceptions.RequestValidationException;
-import com.lic.epgs.policyservicing.common.policyservicingcontroller.service.PolicyServicingService;
+import com.lic.epgs.policyservicing.common.policyservicingcontroller.dto.PolicyServiceDocumentDto;
+import com.lic.epgs.policyservicing.common.policyservicingcontroller.service.PolicyServicingControllerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/policyServicing")
 public class PolicyServicingController {
 
     @Autowired
-    private PolicyServicingService policyServicingService;
+    private PolicyServicingControllerService policyServicingControllerService;
 
-    @GetMapping("/getPolicyServiceById")
-    public ResponseEntity<CommonResponseDto<PolicyServiceDto>> getPolicyServiceById(PolicyServiceRequestDto PolicyServiceRequestDto)
-            throws ApplicationException, RequiredFieldException, RequestValidationException {
-        CommonResponseDto<PolicyServiceDto> response = policyServicingService.getPolicyServiceById(PolicyServiceRequestDto);
-        return new ResponseEntity<CommonResponseDto<PolicyServiceDto>>(response, HttpStatus.OK);
+    @PostMapping("/save-policy-service-document")
+    public CommonResponseDto savePolicyServiceDocument(@RequestBody PolicyServiceDocumentDto policyServiceDocumentDto) {
+        return policyServicingControllerService.savePolicyServiceDocument(policyServiceDocumentDto);
     }
+
 }

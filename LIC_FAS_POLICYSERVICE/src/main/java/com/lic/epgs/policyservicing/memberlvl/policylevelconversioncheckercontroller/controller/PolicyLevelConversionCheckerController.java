@@ -1,56 +1,62 @@
 package com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.controller;
 
-import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.entity.PolicyLevelConversionEntity;
-import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.entity.PolicyLevelConversionTempEntity;
+import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.model.PolicyConversion;
 import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncheckercontroller.service.PolicyLevelConversionCheckerControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
-@RequestMapping("/policylevelconversioncheckercontroller")
 public class PolicyLevelConversionCheckerController {
 
     @Autowired
     private PolicyLevelConversionCheckerControllerService policyLevelConversionCheckerControllerService;
 
-    @PostMapping("/updateConversionStatus")
-    @Transactional
-    public void updateConversionStatus(@RequestBody Long conversionId) {
-        policyLevelConversionCheckerControllerService.updateConversionStatus(conversionId);
+    @GetMapping("/policyConversion")
+    public List<PolicyConversion> existingCommonSearch(@RequestParam(value="mphCode", required = false) String mphCode,
+                                                       @RequestParam(value="mphName", required = false) String mphName,
+                                                       @RequestParam(value="status", required = false) String status,
+                                                       @RequestParam(value="product", required = false) String product,
+                                                       @RequestParam(value="unitCode", required = false) String unitCode,
+                                                       @RequestParam(value="pageCount") int pageCount,
+                                                       @RequestParam(value="limit") int limit) {
+        return policyLevelConversionCheckerControllerService.existingCommonSearch(mphCode, mphName, status, product, unitCode, pageCount, limit);
     }
 
-    @PostMapping("/updateConversionWorkflowStatus")
-    @Transactional
-    public void updateConversionWorkflowStatus(@RequestBody Long conversionId, @RequestBody String modifiedBy) {
-        policyLevelConversionCheckerControllerService.updateConversionWorkflowStatus(conversionId, modifiedBy);
+    @PostMapping("/policyConversion/setStatus")
+    public void setStatus(@RequestParam(value="status") String status){
+        policyLevelConversionCheckerControllerService.setStatus(status);
     }
 
-    @PostMapping("/checkIfExists")
-    public PolicyLevelConversionEntity checkIfExists(@RequestBody Long prevPolicyId) {
-        return policyLevelConversionCheckerControllerService.checkIfExists(prevPolicyId);
+    @PostMapping("/policyConversion/setMessage")
+    public void setMessage(@RequestParam(value="message") String message){
+        policyLevelConversionCheckerControllerService.setMessage(message);
     }
 
-    @PostMapping("/saveNewPolicyLevelConversionEntity")
-    @Transactional
-    public void saveNewPolicyLevelConversionEntity(@RequestBody Long conversionId) {
-        policyLevelConversionCheckerControllerService.saveNewPolicyLevelConversionEntity(conversionId);
+    @PostMapping("/policyConversion/setDefaultLimit")
+    public void setDefaultLimit(@RequestParam(value="limit") int limit){
+        policyLevelConversionCheckerControllerService.setDefaultLimit(limit);
     }
 
-    @PostMapping("/saveNewPolicyServiceDocumentEntity")
-    @Transactional
-    public void saveNewPolicyServiceDocumentEntity(@RequestBody Long conversionId) {
-        policyLevelConversionCheckerControllerService.saveNewPolicyServiceDocumentEntity(conversionId);
+    @PostMapping("/policyConversion/setDefaultPageCount")
+    public void setDefaultPageCount(@RequestParam(value="pageCount") int pageCount){
+        policyLevelConversionCheckerControllerService.setDefaultPageCount(pageCount);
     }
 
-    @PostMapping("/saveNewPolicyServiceNotesEntity")
-    @Transactional
-    public void saveNewPolicyServiceNotesEntity(@RequestBody Long serviceId) {
-        policyLevelConversionCheckerControllerService.saveNewPolicyServiceNotesEntity(serviceId);
+    @PostMapping("/policyConversion/sortByCreatedOn")
+    public void sortByCreatedOn(){
+        policyLevelConversionCheckerControllerService.sortByCreatedOn();
+    }
+
+    @PostMapping("/policyConversion/ignoreBlankSearchParameters")
+    public void ignoreBlankSearchParameters(){
+        policyLevelConversionCheckerControllerService.ignoreBlankSearchParameters();
+    }
+
+    @PostMapping("/policyConversion/returnErrorTransactionStatusAndMessage")
+    public void returnErrorTransactionStatusAndMessage(){
+        policyLevelConversionCheckerControllerService.returnErrorTransactionStatusAndMessage();
     }
 
 }

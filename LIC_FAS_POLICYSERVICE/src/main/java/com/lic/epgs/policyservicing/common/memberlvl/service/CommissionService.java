@@ -1,38 +1,25 @@
 package com.lic.epgs.policyservicing.common.memberlvl.service;
 
-import java.util.List;
-
+import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionDetailsEntity;
+import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionEntity;
+import com.lic.epgs.policyservicing.common.memberlvl.repository.CommissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionEntity;
-import com.lic.epgs.policyservicing.common.memberlvl.entity.CommissionDetailsEntity;
-import com.lic.epgs.policyservicing.common.memberlvl.repository.CommissionRepository;
+import java.util.List;
 
 @Service
 public class CommissionService {
-	
-	@Autowired
-	private CommissionRepository commissionRepository;
-	
-	public CommissionEntity getInprogressLoad(String role, String unitCode) {
-		return commissionRepository.getInprogressLoad(role, unitCode);
-	}
-	
-	public CommissionDetailsEntity getInprogressMakerLoad(String role, String unitCode) {
-		return commissionRepository.getInprogressMakerLoad(role, unitCode);
-	}
-	
-	public List<CommissionEntity> getAllCommissions() {
-		return commissionRepository.findAll();
-	}
-	
-	public CommissionEntity saveCommission(CommissionEntity commission) {
-		return commissionRepository.save(commission);
-	}
-	
-	public CommissionDetailsEntity saveCommissionDetails(CommissionDetailsEntity commissionDetails) {
-		return commissionRepository.save(commissionDetails);
-	}
+
+    @Autowired
+    private CommissionRepository commissionRepository;
+
+    public List<CommissionEntity> getInprogressLoad(String unitCode) {
+        return commissionRepository.getInprogressLoad(unitCode);
+    }
+
+    public List<CommissionEntity> getInprogressMakerLoad(String unitCode) {
+        return commissionRepository.getInprogressMakerLoad(unitCode);
+    }
 
 }

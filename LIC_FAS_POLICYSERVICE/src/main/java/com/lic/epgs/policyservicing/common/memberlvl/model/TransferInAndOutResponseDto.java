@@ -1,64 +1,28 @@
-package com.lic.epgs.policyservicing.common.memberlvl.model; 
+package com.lic.epgs.policyservicing.common.memberlvl.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class TransferInAndOutResponseDto {
- 
     @Id
-    private Long id;
-    private Integer policyId;
-    private Integer licId;
-    private Integer transferIn;
-    private Integer transferOut;
-    private Integer total;
- 
-    public Long getId() {
-        return id;
+    private long transferId;
+    private String status;
+
+    public long getTransferId() {
+        return transferId;
     }
- 
-    public void setId(Long id) {
-        this.id = id;
+
+    public void setTransferId(long transferId) {
+        this.transferId = transferId;
     }
- 
-    public Integer getPolicyId() {
-        return policyId;
+
+    public String getStatus() {
+        return status;
     }
- 
-    public void setPolicyId(Integer policyId) {
-        this.policyId = policyId;
+
+    public void setStatus(String status) {
+        this.status = status;
     }
- 
-    public Integer getLicId() {
-        return licId;
-    }
- 
-    public void setLicId(Integer licId) {
-        this.licId = licId;
-    }
- 
-    public Integer getTransferIn() {
-        return transferIn;
-    }
- 
-    public void setTransferIn(Integer transferIn) {
-        this.transferIn = transferIn;
-    }
- 
-    public Integer getTransferOut() {
-        return transferOut;
-    }
- 
-    public void setTransferOut(Integer transferOut) {
-        this.transferOut = transferOut;
-    }
- 
-    public Integer getTotal() {
-        return total;
-    }
- 
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
+
 }

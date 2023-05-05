@@ -1,10 +1,18 @@
 package com.lic.epgs.fund.policyinterestratefundcontroller.repository;
 
-import com.lic.epgs.fund.policyinterestratefundcontroller.model.InterestRateResponseDto;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.lic.epgs.fund.policyinterestratefundcontroller.dto.InterestRateResponseDto;
 
-@Repository
-public interface PolicyInterestRateFundControllerRepository extends JpaRepository<InterestRateResponseDto, String> {
-    InterestRateResponseDto debitMembersByPolicy(String policyNo);
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PolicyInterestRateFundControllerRepository extends JpaRepository<InterestRateResponseDto, Long> {
+
+    InterestRateResponseDto creditPolicyMemberByPolicyNo(String policyNo);
+
+    InterestRateResponseDto creditBulkPolicyMembersByPolicyNo(String policyNo);
+
+    InterestRateResponseDto debitPolicyMemberByPolicyNoAndMemberId(String policyNo, String memberId);
+
+    InterestRateResponseDto debitPolicyMembersByPolicyNo(String policyNo);
+
+    InterestRateResponseDto debitBulkPolicyMembersByPolicyNo(String policyNo);
 }

@@ -1,81 +1,49 @@
 package com.lic.epgs.policyservicing.common.memberlvl.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Transfer")
 public class Transfer {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transfer_id")
-    private long transferId;
- 
-    @Column(name = "source_id")
-    private Long sourceId;
- 
-    @Column(name = "destination_id")
-    private Long destinationId;
- 
-    @Column(name = "status")
-    private String status;
- 
-    @Column(name = "created_by")
-    private String createdBy;
- 
-    @Column(name = "modified_by")
-    private String modifiedBy;
- 
-    public long getTransferId() {
-        return transferId;
+    private Long id;
+    private String transferStatus;
+    private String unitCode;
+    private String modifiedDate;
+
+    public Long getId() {
+        return id;
     }
- 
-    public void setTransferId(long transferId) {
-        this.transferId = transferId;
+
+    public void setId(Long id) {
+        this.id = id;
     }
- 
-    public Long getSourceId() {
-        return sourceId;
+
+    public String getTransferStatus() {
+        return transferStatus;
     }
- 
-    public void setSourceId(Long sourceId) {
-        this.sourceId = sourceId;
+
+    public void setTransferStatus(String transferStatus) {
+        this.transferStatus = transferStatus;
     }
- 
-    public Long getDestinationId() {
-        return destinationId;
+
+    public String getUnitCode() {
+        return unitCode;
     }
- 
-    public void setDestinationId(Long destinationId) {
-        this.destinationId = destinationId;
+
+    public void setUnitCode(String unitCode) {
+        this.unitCode = unitCode;
     }
- 
-    public String getStatus() {
-        return status;
+
+    public String getModifiedDate() {
+        return modifiedDate;
     }
- 
-    public void setStatus(String status) {
-        this.status = status;
-    }
- 
-    public String getCreatedBy() {
-        return createdBy;
-    }
- 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
- 
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
- 
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
+
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 }

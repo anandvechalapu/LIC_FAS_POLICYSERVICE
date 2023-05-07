@@ -1,26 +1,46 @@
-@Repository
-public class ExitingSurrenderRepository {
+package com.lic.epgs.surrender.repository;
 
-    public PolicySurrenderApiResponse getExitingSurrenderPolicies(String roleType, String pageName) {
-        PolicySurrenderApiResponse response;
+import com.lic.epgs.model.MphBankDto;
+import com.lic.epgs.model.PolicySurrenderApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class PolicySurrenderRepository {
+
+    private static final Logger logger = LoggerFactory.getLogger(PolicySurrenderRepository.class);
+
+    @Autowired
+    private MphBankRepository mphBankRepository;
+
+    // Repository method to get policy bank details
+    public PolicySurrenderApiResponse getPolicyBankDetails(String mphId) {
+        logger.info("Fetching policy bank details for mphId: {}", mphId);
+
+        PolicySurrenderApiResponse policySurrenderApiResponse = new PolicySurrenderApiResponse();
+
         try {
-            List<PolicySurrender> surrenders = retrieveSurrenders(roleType, pageName);
-            // map the list of surrenders to a list of PolicySurrenderDto objects
-            List<PolicySurrenderDto> mappedSurrenders = mapList(surrenders);
-            // sort the list of surrenders in ascending order of their surrender ID
-            mappedSurrenders.sort(Comparator.comparing(PolicySurrenderDto::getSurrenderId));
-            response = new PolicySurrenderApiResponse(mappedSurrenders, TransactionStatus.SUCCESS, "");
-        } catch (Exception ex) {
-            response = new PolicySurrenderApiResponse(null, TransactionStatus.FAIL, ex.getMessage());
+            List<MphBankDto> mphBankDtos = mphBankRepository.getMphBankEntityByMphId(mphId);
+            if (mphBankDtos.size() > 0) {
+                policySurrenderApiResponse.setPolicyBanks(mphBankDtos);
+                policySurrenderApiResponse.setTransactionStatus("SUCCESS");
+                policySurrenderApiResponse.setTransactionMessage("FETCH_MESSAGE");
+            } else {
+                policySurrenderApiResponse.setTransactionStatus("FAIL");
+                policySurrenderApiResponse.setTransactionMessage("NO_RECORD_FOUND");
+            }
+        } catch (IllegalArgumentException e) {
+            policySurrenderApiResponse.setTransactionStatus("FAIL");
+            policySurrenderApiResponse.setTransactionMessage(e.getMessage());
         }
-        return response;
+
+        logger.info("Finished fetching policy bank details for mphId: {}", mphId);
+
+        return policySurrenderApiResponse;
     }
-    
-    private List<PolicySurrender> retrieveSurrenders(String roleType, String pageName) {
-        // code to retrieve a list of policy surrenders based on the role type and page name
-    }
-    
-    private List<PolicySurrenderDto> mapList(List<PolicySurrender> surrenders) {
-        // code to map the list of surrenders to a list of PolicySurrenderDto objects
-    }
+
 }

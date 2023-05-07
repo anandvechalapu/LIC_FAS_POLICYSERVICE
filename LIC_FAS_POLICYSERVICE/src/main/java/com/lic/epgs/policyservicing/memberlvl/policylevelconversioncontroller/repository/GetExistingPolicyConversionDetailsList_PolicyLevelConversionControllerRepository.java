@@ -1,6 +1,11 @@
-@Repository
-public interface GetExistingPolicyConversionDetailsList_PolicyLevelConversionControllerRepository {
+package com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.repository;
 
-    @Query("SELECT * from policy_conversion_details WHERE role = :role AND unit_code = :unitCode")
-    List<PolicyConversionDetails> getExistingPolicyConversionDetailsList(@Param("role") String role, @Param("unitCode") String unitCode);
+import org.springframework.data.repository.CrudRepository;
+
+import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.model.ExistingPolicyConversionDetails;
+
+public interface GetExistingPolicyConversionDetailsList_PolicyLevelConversionControllerRepository extends CrudRepository<ExistingPolicyConversionDetails, Long> {
+    
+    List<ExistingPolicyConversionDetails> findByRoleAndUnitCode(String role, String unitCode);
+    
 }

@@ -1,35 +1,26 @@
-package com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.model.PolicyLevelConversion;
-
-public interface PolicyLevelConversionRepository extends JpaRepository<PolicyLevelConversion, String> {
-
-}
-
 package com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.dto.PolicyLevelConversionDto;
-import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.dto.CommonResponseDto;
-import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.service.PolicyLevelConversionService;
+import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.entity.PolicyLevelConversionDetails;
+import com.lic.epgs.policyservicing.memberlvl.policylevelconversioncontroller.service.GetInprogressPolicyConversionDetailsList_PolicyLevelConversionControllerService;
 
 @RestController
-@RequestMapping("/policyLevelConversion")
+@RequestMapping("/policylevelconversion")
 public class PolicyLevelConversionController {
 
-	@Autowired
-	private PolicyLevelConversionService policyLevelConversionService;
-	
-	@PostMapping
-	public CommonResponseDto savePolicyConversionDetails(@RequestBody PolicyLevelConversionDto policyLevelConversionDTO) {
-		return policyLevelConversionService.savePolicyConversionDetails(policyLevelConversionDTO);
-	}
-	
+    @Autowired
+    private GetInprogressPolicyConversionDetailsList_PolicyLevelConversionControllerService service;
+
+    @GetMapping("/getconversiondetails")
+    public List<PolicyLevelConversionDetails> getInProgressPolicyConversionDetails(@RequestParam("role") String role, @RequestParam("unitCode") String unitCode) {
+        return service.getInProgressPolicyConversionDetails(role, unitCode);
+    }
+
 }

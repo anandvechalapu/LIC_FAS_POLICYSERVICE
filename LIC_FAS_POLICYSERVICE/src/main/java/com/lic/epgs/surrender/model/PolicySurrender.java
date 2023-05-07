@@ -1,70 +1,79 @@
+package com.lic.epgs.surrender.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Entity
-@Table(name = "policy_surrender")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
-@EqualsAndHashCode
-@PackageName("com.lic.epgs.surrender.model")
 public class PolicySurrender {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name = "surrender_id")
-    private String surrenderId;
-    
-    @Column(name = "policy_name")
-    private String policyName;
-    
-    @Column(name = "policy_number")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long surrenderId;
     private String policyNumber;
+    private String surrenderAmount;
+    private String surrenderDate;
+    private String surrenderStatus;
     
-    @Column(name = "status")
-    private String status;
-    
-    @Column(name = "amount")
-    private double amount;
-    
-    @Column(name = "role_type")
-    private String roleType;
-    
-    @Column(name = "page_name")
-    private String pageName;
-}
+    public PolicySurrender() {
+		super();
+	}
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
-@EqualsAndHashCode
-@PackageName("com.lic.epgs.surrender.model")
-public class PolicySurrenderDto {
-    
-    private String surrenderId;
-    private String policyName;
-    private String policyNumber;
-    private String status;
-    private double amount;
-    private String roleType;
-    private String pageName;
-}
+	public PolicySurrender(Long surrenderId, String policyNumber, String surrenderAmount, String surrenderDate,
+			String surrenderStatus) {
+		super();
+		this.surrenderId = surrenderId;
+		this.policyNumber = policyNumber;
+		this.surrenderAmount = surrenderAmount;
+		this.surrenderDate = surrenderDate;
+		this.surrenderStatus = surrenderStatus;
+	}
 
-@Data
-@PackageName("com.lic.epgs.surrender.model")
-public class PolicySurrenderApiResponse {
-    
-    private List<PolicySurrenderDto> surrenders;
-    private TransactionStatus status;
-    private String message;
-}
+	public Long getSurrenderId() {
+		return surrenderId;
+	}
 
-@Data
-@PackageName("com.lic.epgs.surrender.model")
-public enum TransactionStatus {
-    SUCCESS,
-    FAIL
+	public void setSurrenderId(Long surrenderId) {
+		this.surrenderId = surrenderId;
+	}
+
+	public String getPolicyNumber() {
+		return policyNumber;
+	}
+
+	public void setPolicyNumber(String policyNumber) {
+		this.policyNumber = policyNumber;
+	}
+
+	public String getSurrenderAmount() {
+		return surrenderAmount;
+	}
+
+	public void setSurrenderAmount(String surrenderAmount) {
+		this.surrenderAmount = surrenderAmount;
+	}
+
+	public String getSurrenderDate() {
+		return surrenderDate;
+	}
+
+	public void setSurrenderDate(String surrenderDate) {
+		this.surrenderDate = surrenderDate;
+	}
+
+	public String getSurrenderStatus() {
+		return surrenderStatus;
+	}
+
+	public void setSurrenderStatus(String surrenderStatus) {
+		this.surrenderStatus = surrenderStatus;
+	}
+    
+    
+    
+    
+    
+    
+    
 }

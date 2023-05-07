@@ -1,67 +1,88 @@
 package com.lic.epgs.topupda.model;
 
-import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "topupda_temp")
 public class TopupdaTempEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	private Long topupId;
+	private String topupName;
+	private String topupType;
+	private String topupStatus;
+	
+	public Long getTopupId() {
+		return topupId;
+	}
+	public void setTopupId(Long topupId) {
+		this.topupId = topupId;
+	}
+	public String getTopupName() {
+		return topupName;
+	}
+	public void setTopupName(String topupName) {
+		this.topupName = topupName;
+	}
+	public String getTopupType() {
+		return topupType;
+	}
+	public void setTopupType(String topupType) {
+		this.topupType = topupType;
+	}
+	public String getTopupStatus() {
+		return topupStatus;
+	}
+	public void setTopupStatus(String topupStatus) {
+		this.topupStatus = topupStatus;
+	}
+	
+	
 
-    @Column(name = "topup_id")
-    private Long topupId;
+}
 
-    @Column(name = "topup_status")
-    private String topupStatus;
+@Entity
+@Table(name = "topupda")
+public class TopupdaEntity {
 
-    @Column(name = "amount_status")
-    private String amountStatus;
-
-    @Column(name = "modified_on")
-    private Date modifiedOn;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getTopupId() {
-        return topupId;
-    }
-
-    public void setTopupId(Long topupId) {
-        this.topupId = topupId;
-    }
-
-    public String getTopupStatus() {
-        return topupStatus;
-    }
-
-    public void setTopupStatus(String topupStatus) {
-        this.topupStatus = topupStatus;
-    }
-
-    public String getAmountStatus() {
-        return amountStatus;
-    }
-
-    public void setAmountStatus(String amountStatus) {
-        this.amountStatus = amountStatus;
-    }
-
-    public Date getModifiedOn() {
-        return modifiedOn;
-    }
-
-    public void setModifiedOn(Date modifiedOn) {
-        this.modifiedOn = modifiedOn;
-    }
-
+	@Id
+	private Long topupId;
+	private String topupName;
+	private String topupType;
+	private String topupStatus;
+	private String topupData;
+	
+	public Long getTopupId() {
+		return topupId;
+	}
+	public void setTopupId(Long topupId) {
+		this.topupId = topupId;
+	}
+	public String getTopupName() {
+		return topupName;
+	}
+	public void setTopupName(String topupName) {
+		this.topupName = topupName;
+	}
+	public String getTopupType() {
+		return topupType;
+	}
+	public void setTopupType(String topupType) {
+		this.topupType = topupType;
+	}
+	public String getTopupStatus() {
+		return topupStatus;
+	}
+	public void setTopupStatus(String topupStatus) {
+		this.topupStatus = topupStatus;
+	}
+	public String getTopupData() {
+		return topupData;
+	}
+	public void setTopupData(String topupData) {
+		this.topupData = topupData;
+	}	
+	
 }

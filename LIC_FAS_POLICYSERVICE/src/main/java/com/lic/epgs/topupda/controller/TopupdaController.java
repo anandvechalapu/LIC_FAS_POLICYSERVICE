@@ -1,42 +1,34 @@
 package com.lic.epgs.topupda.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.topupda.model.TopupdaTempEntity;
-import com.lic.epgs.topupda.model.TopupdaEntity;
-import com.lic.epgs.topupda.service.TopupdaService;
+import com.lic.epgs.topupda.model.TopupdaModel;
+import com.lic.epgs.topupda.service.AnnutityApiTopupdaService;
 
 @RestController
 @RequestMapping("/topupda")
 public class TopupdaController {
-
+	
 	@Autowired
-	private TopupdaService topupdaService;
-
-	@GetMapping("/temp/{topupId}")
-	public TopupdaTempEntity findTopupdaTempByTopupId(@PathVariable Long topupId) {
-		return topupdaService.findTopupdaTempByTopupId(topupId);
+	private AnnutityApiTopupdaService annutityApiTopupdaService;
+	
+	@PostMapping("/save")
+	public TopupdaModel saveTopupda(@RequestBody TopupdaModel topupdaModel) {
+		return annutityApiTopupdaService.saveTopupda(topupdaModel);
 	}
-
-	@PostMapping("/temp")
-	public TopupdaTempEntity saveTopupdaTemp(@RequestBody TopupdaTempEntity topupdaTempEntity) {
-		return topupdaService.saveTopupdaTemp(topupdaTempEntity);
+	
+	@PostMapping("/find")
+	public TopupdaModel findByQuotationNumber(@RequestBody String quotationNumber) {
+		return annutityApiTopupdaService.findByQuotationNumber(quotationNumber);
 	}
-
-	@GetMapping("/{topupId}")
-	public TopupdaEntity findTopupdaByTopupId(@PathVariable Long topupId) {
-		return topupdaService.findTopupdaByTopupId(topupId);
-	}
-
-	@PostMapping
-	public TopupdaEntity saveTopupda(@RequestBody TopupdaEntity topupdaEntity) {
-		return topupdaService.saveTopupda(topupdaEntity);
+	
+	@PostMapping("/update")
+	public void updateAmountStatus(@RequestBody String action, String anReason, Long id) {
+		annutityApiTopupdaService.updateAmountStatus(action, anReason, id);
 	}
 
 }

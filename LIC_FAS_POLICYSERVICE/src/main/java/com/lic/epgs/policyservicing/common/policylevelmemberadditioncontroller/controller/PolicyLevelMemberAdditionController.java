@@ -1,27 +1,45 @@
 package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.controller;
 
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.CommonResponseDto;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMemberAdditionDto;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.service.PolicyLevelMemberAdditionControllerService;
-
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model.PolicyServiceMember;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.service.SavePolicyLevelMemberAdditionControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/policylevelmemberaddition")
+@RequestMapping("/policylevelmemberadditioncontroller")
 public class PolicyLevelMemberAdditionController {
 
     @Autowired
-    PolicyLevelMemberAdditionControllerService policyLevelMemberAdditionControllerService;
+    private SavePolicyLevelMemberAdditionControllerService savePolicyLevelMemberAdditionControllerService;
 
-    @PostMapping("/search")
-    public ResponseEntity<CommonResponseDto> searchPolicyMemberAddition(@RequestBody PolicyServiceMemberAdditionDto policyServiceMemberAdditionDto){
-        CommonResponseDto commonResponseDto = policyLevelMemberAdditionControllerService.searchPolicyMemberAddition(policyServiceMemberAdditionDto);
-        return new ResponseEntity<>(commonResponseDto, HttpStatus.OK);
+    @PostMapping
+    public ResponseEntity<PolicyServiceMember> save(@RequestBody PolicyServiceMember policyServiceMember) {
+        if (savePolicyLevelMemberAdditionControllerService.isValidComponentName(policyServiceMember.getComponentName())) {
+            return new ResponseEntity<>(savePolicyLevelMemberAdditionControllerService.save(policyServiceMember), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @PutMapping
+    public ResponseEntity<PolicyServiceMember> update(@RequestBody PolicyServiceMember policyServiceMember) {
+        if (savePolicyLevelMemberAdditionControllerService.isValidComponentName(policyServiceMember.getComponentName())) {
+            return new ResponseEntity<>(savePolicyLevelMemberAdditionControllerService.update(policyServiceMember), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping(value = "/draft")
+    public ResponseEntity<Void> setDraftStatus() {
+        savePolicyLevelMemberAdditionControllerService.setDraftStatus();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/active")
+    public ResponseEntity<Void> setActiveStatus() {
+        savePolicyLevelMemberAdditionControllerService.setActiveStatus();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

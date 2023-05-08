@@ -1,0 +1,4 @@
+@Repository
+public interface SaveAddressDetailsPolicyLevelDetailsChangeControllerRepository {
+    PolicyDtlsResponseDto saveAddressDetails(PolicyAddressOldDto mphAddressNewDto) throws IllegalArgumentException;
+}

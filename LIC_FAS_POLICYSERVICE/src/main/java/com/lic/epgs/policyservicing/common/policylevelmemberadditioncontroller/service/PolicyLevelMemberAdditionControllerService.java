@@ -4,29 +4,33 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.entity.PolicyServiceMemberAdditionEntity;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository.SendToMaker_PolicyLevelMemberAdditionController;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.CommonResponseDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMemberAdditionDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMbrDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository.PolicyLevelMemberAdditionControllerRepository;
 
 @Service
 public class PolicyLevelMemberAdditionControllerService {
 
 	@Autowired
-	private SendToMaker_PolicyLevelMemberAdditionController sendToMaker_PolicyLevelMemberAdditionController;
+	private PolicyLevelMemberAdditionControllerRepository policyLevelMemberAdditionControllerRepository;
 
-	@Transactional
-	public void sendToMakerOrChecker(String memberAdditionStatus, String modifiedBy, String modifiedOn, Long memberAdditionId,
-			String unitCode) {
-		sendToMaker_PolicyLevelMemberAdditionController.sendToMakerOrChecker(memberAdditionStatus, modifiedBy, modifiedOn, memberAdditionId, unitCode);
+	public CommonResponseDto<Object> getAllPolicyLevelMemberAdditionController(
+			PolicyServiceMemberAdditionDto policyServiceMemberAdditionDto) {
+		return policyLevelMemberAdditionControllerRepository.getAllPolicyLevelMemberAdditionController(policyServiceMemberAdditionDto);
 	}
-	
-	public List<PolicyServiceMemberAdditionEntity> findAll(){
-		return sendToMaker_PolicyLevelMemberAdditionController.findAll();
+
+	public List<PolicyServiceMbrDto> getMemberDetails() {
+		return policyLevelMemberAdditionControllerRepository.getMemberDetails();
 	}
-	
-	public PolicyServiceMemberAdditionEntity findById(Long id) {
-		return sendToMaker_PolicyLevelMemberAdditionController.findById(id).orElse(null);
+
+	public List<PolicyServiceMemberAdditionDto> getMemberAdditionDetails() {
+		return policyLevelMemberAdditionControllerRepository.getMemberAdditionDetails();
+	}
+
+	public List<String> getNotes() {
+		return policyLevelMemberAdditionControllerRepository.getNotes();
 	}
 
 }

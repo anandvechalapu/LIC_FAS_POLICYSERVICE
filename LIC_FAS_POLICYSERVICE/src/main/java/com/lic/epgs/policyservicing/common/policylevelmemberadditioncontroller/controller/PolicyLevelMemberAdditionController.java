@@ -1,51 +1,55 @@
+package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model.PolicyLevelMemberAdditionController;
+
+@Repository
+public interface PolicyLevelMemberAdditionControllerRepository extends JpaRepository<PolicyLevelMemberAdditionController, Long> {
+
+    @Query("SELECT MAX(licenseId) FROM PolicyLevelMemberAdditionController")
+    Optional<Long> getMaxLicenseId();
+ 
+    Optional<PolicyLevelMemberAdditionController> findByLicenseId(Long licenseId);
+
+}
+
 package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.controller;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.CommonResponseDto;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMemberAdditionDto;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMbrDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model.PolicyLevelMemberAdditionController;
 import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.service.PolicyLevelMemberAdditionControllerService;
 
 @RestController
-@RequestMapping("/policyLevelMemberAdditionController")
+@RequestMapping("/policylevelmemberaddition")
 public class PolicyLevelMemberAdditionController {
+    @Autowired
+    private PolicyLevelMemberAdditionControllerService policyLevelMemberAdditionControllerService;
 
-	@Autowired
-	PolicyLevelMemberAdditionControllerService policyLevelMemberAdditionControllerService;
+    @GetMapping("/maxlicenseid")
+    public Optional<Long> getMaxLicenseId(){
+        return policyLevelMemberAdditionControllerService.getMaxLicenseId();
+    }
 
-	@GetMapping("/getall")
-	public ResponseEntity<CommonResponseDto<Object>> getAllPolicyLevelMemberAdditionController(
-			PolicyServiceMemberAdditionDto policyServiceMemberAdditionDto) {
-		CommonResponseDto<Object> response = policyLevelMemberAdditionControllerService
-				.getAllPolicyLevelMemberAdditionController(policyServiceMemberAdditionDto);
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+    @GetMapping("/{licenseId}")
+    public Optional<PolicyLevelMemberAdditionController> getByLicenseId(@PathVariable Long licenseId){
+        return policyLevelMemberAdditionControllerService.findByLicenseId(licenseId);
+    }
 
-	@GetMapping("/getmemberdetails")
-	public ResponseEntity<List<PolicyServiceMbrDto>> getMemberDetails() {
-		List<PolicyServiceMbrDto> response = policyLevelMemberAdditionControllerService.getMemberDetails();
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@GetMapping("/getmemberadditiondetails")
-	public ResponseEntity<List<PolicyServiceMemberAdditionDto>> getMemberAdditionDetails() {
-		List<PolicyServiceMemberAdditionDto> response = policyLevelMemberAdditionControllerService
-				.getMemberAdditionDetails();
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-	@GetMapping("/getnotes")
-	public ResponseEntity<List<String>> getNotes() {
-		List<String> response = policyLevelMemberAdditionControllerService.getNotes();
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+    @PostMapping
+    public PolicyLevelMemberAdditionController save(@RequestBody PolicyLevelMemberAdditionController policyLevelMemberAdditionController){
+        return policyLevelMemberAdditionControllerService.save(policyLevelMemberAdditionController);
+    }
 
 }

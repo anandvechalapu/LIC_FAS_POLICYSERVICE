@@ -1,12 +1,17 @@
-@Repository
-public interface GetBankListPolicyLevelDetailsChangeControllerRepository {
-    /**
-     * Retrieves a list of PolicyBankOldDto objects from the database based on the provided mphId
-     * The retrieved PolicyBankOldDto objects are converted from MphBankDto objects using the convertNewDtoToOld
-     * method.
-     * 
-     * @param mphId The id of the mph associated with the bank list
-     * @return A list of PolicyBankOldDto objects
-     */
-    List<PolicyBankOldDto> getBankList(Long mphId);
+package com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.model.MphBankDto;
+import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.model.PolicyBankOldDto;
+
+public interface GetBankListPolicyLevelDetailsChangeControllerRepository extends JpaRepository<MphBankDto, Long> {
+	
+	@Query("SELECT mb FROM MphBankDto mb WHERE mb.mphId = ?1")
+	public PolicyBankOldDto convertNewDtoToOld(Long mphId);
+	
+	@Query("SELECT mb FROM MphBankDto mb WHERE mb.mphId = ?1")
+	public List<MphBankDto> getBankList(Long mphId);
+
 }

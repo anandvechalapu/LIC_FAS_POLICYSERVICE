@@ -1,20 +1,26 @@
-package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository; 
+import java.util.List;
 
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model.CommonResponseDto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-public interface PolicyLevelMemberAdditionControllerRepository {
-    
-    /**
-    * Saves a note related to a Policy Service Member.
-    *
-    * @param memberAdditionId - A unique identifier for the member addition.
-    * @param note - A string containing the text of the note.
-    * @param createdBy - A string containing the username of the user who created the note.
-    * @param createdOn - A date and time indicating when the note was created.
-    *
-    * @return A CommonResponseDto with a SUCCESS status and an empty response data if the note was saved successfully.
-    *         A CommonResponseDto with a FAIL status and a transaction message indicating that the memberAdditionId
-    *         is invalid if the memberAdditionId is not associated with a Policy Service Member.
-    */
-    CommonResponseDto saveNote(String memberAdditionId, String note, String createdBy, Date createdOn);
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.CommonResponseDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyAomDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMemberAdditionDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMbrDto;
+
+public interface PolicyLevelMemberAdditionControllerRepository extends JpaRepository<CommonResponseDto<Object>, Long> {
+
+	@Query("SELECT new com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyAomDto(p.POLICY_NUMBER, p.MPH_NAME, p.MPH_CODE, p.LINE_OF_BUSINESS, p.PRODUCT_ID, p.VARIANT, p.NO_OF_CATEGORY, mbr, madd) "
+			+ "FROM PolicyAomDto p, PolicyServiceMbrDto mbr, PolicyServiceMemberAdditionDto madd "
+			+ "WHERE p.POLICY_NUMBER = mbr.POLICY_NUMBER AND p.POLICY_NUMBER = madd.POLICY_NUMBER")
+	public CommonResponseDto<Object> getAllPolicyLevelMemberAdditionController(PolicyServiceMemberAdditionDto policyServiceMemberAdditionDto);
+
+	@Query("SELECT mbr FROM PolicyServiceMbrDto mbr")
+	public List<PolicyServiceMbrDto> getMemberDetails();
+
+	@Query("SELECT madd FROM PolicyServiceMemberAdditionDto madd")
+	public List<PolicyServiceMemberAdditionDto> getMemberAdditionDetails();
+
+	public List<String> getNotes();
+
 }

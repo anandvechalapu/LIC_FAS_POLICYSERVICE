@@ -1,36 +1,25 @@
 package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.CommonResponseDto;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMemberAdditionDto;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMbrDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model.PolicyLevelMemberAdditionController;
 import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository.PolicyLevelMemberAdditionControllerRepository;
 
 @Service
 public class PolicyLevelMemberAdditionControllerService {
 
-	@Autowired
-	private PolicyLevelMemberAdditionControllerRepository policyLevelMemberAdditionControllerRepository;
+    @Autowired
+    private PolicyLevelMemberAdditionControllerRepository repository;
 
-	public CommonResponseDto<Object> getAllPolicyLevelMemberAdditionController(
-			PolicyServiceMemberAdditionDto policyServiceMemberAdditionDto) {
-		return policyLevelMemberAdditionControllerRepository.getAllPolicyLevelMemberAdditionController(policyServiceMemberAdditionDto);
-	}
+    public Optional<Long> getMaxLicenseId(){
+        return repository.getMaxLicenseId();
+    }
 
-	public List<PolicyServiceMbrDto> getMemberDetails() {
-		return policyLevelMemberAdditionControllerRepository.getMemberDetails();
-	}
-
-	public List<PolicyServiceMemberAdditionDto> getMemberAdditionDetails() {
-		return policyLevelMemberAdditionControllerRepository.getMemberAdditionDetails();
-	}
-
-	public List<String> getNotes() {
-		return policyLevelMemberAdditionControllerRepository.getNotes();
-	}
+    public Optional<PolicyLevelMemberAdditionController> findByLicenseId(Long licenseId){
+        return repository.findByLicenseId(licenseId);
+    }
 
 }

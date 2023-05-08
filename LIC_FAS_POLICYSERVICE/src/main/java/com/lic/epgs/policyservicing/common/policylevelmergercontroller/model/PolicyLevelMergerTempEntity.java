@@ -1,131 +1,131 @@
+package com.lic.epgs.policyservicing.common.policylevelmergercontroller.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Entity
-@Table(name = "PolicyLevelMerger_temp")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class PolicyLevelMergerTempEntity extends AbstractEntityAudit implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class PolicyLevelMergerTempEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "merge_id")
     private Long mergeId;
-
-    @Column(name = "merge_status")
-    private Integer mergeStatus;
-
-    @Column(name = "workflow_status")
-    private String workflowStatus;
-
+    
+    private String firstName;
+    private String lastName;
+    private String policyNumber;
+    private String policyType;
+    private String policyStatus;
+    private String address;
+    private String city;
+    private String state;
+    private String zipCode;
+    private String country;
+    private String email;
+    private String phone;
+    
+    public Long getMergeId() {
+        return mergeId;
+    }
+    
+    public void setMergeId(Long mergeId) {
+        this.mergeId = mergeId;
+    }
+    
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public String getLastName() {
+        return lastName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+    
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
+    }
+    
+    public String getPolicyType() {
+        return policyType;
+    }
+    
+    public void setPolicyType(String policyType) {
+        this.policyType = policyType;
+    }
+    
+    public String getPolicyStatus() {
+        return policyStatus;
+    }
+    
+    public void setPolicyStatus(String policyStatus) {
+        this.policyStatus = policyStatus;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    public String getCity() {
+        return city;
+    }
+    
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
+    public String getState() {
+        return state;
+    }
+    
+    public void setState(String state) {
+        this.state = state;
+    }
+    
+    public String getZipCode() {
+        return zipCode;
+    }
+    
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+    
+    public String getCountry() {
+        return country;
+    }
+    
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getPhone() {
+        return phone;
+    }
+    
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
-
-@Entity
-@Table(name = "Policy_Master")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class PolicyMasterEntity extends AbstractEntityAudit implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "policy_id")
-    private String policyId;
-
-    @Column(name = "policy_name")
-    private String policyName;
-
-    @Column(name = "merge_id")
-    private Long mergeId;
-
-    @Column(name = "merge_status")
-    private Integer mergeStatus;
-
-}
-
-@Entity
-@Table(name = "Member_Master")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class MemberMasterEntity extends AbstractEntityAudit implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "member_id")
-    private String memberId;
-
-    @Column(name = "member_name")
-    private String memberName;
-
-    @Column(name = "merge_id")
-    private Long mergeId;
-
-    @Column(name = "merge_status")
-    private Integer mergeStatus;
-
-}
-
-@Entity
-@Table(name = "Policy_Service_Document")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class PolicyServiceDocumentEntity extends AbstractEntityAudit implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "policy_document_name")
-    private String policyDocumentName;
-
-    @Column(name = "policy_document_body")
-    private String policyDocumentBody;
-
-    @Column(name = "merge_id")
-    private Long mergeId;
-
-}
-
-@Entity
-@Table(name = "Policy_Service_Notes")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "

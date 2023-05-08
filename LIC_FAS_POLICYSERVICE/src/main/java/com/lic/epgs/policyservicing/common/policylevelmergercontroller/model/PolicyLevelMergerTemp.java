@@ -4,59 +4,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "policy_level_merger_temp")
 public class PolicyLevelMergerTemp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mergeId;
-
-    @ManyToOne
-    @JoinColumn(name = "policy_number")
-    private PolicyMaster policyMaster;
-
-    @ManyToOne
-    @JoinColumn(name = "mph_code")
-    private MphMaster mphMaster;
-
+    private Long id;
+    private String policyNumber;
+    private String policyType;
     private Boolean isActive;
-
-    private LocalDateTime createdOn;
-
     private String createdBy;
-
-    private LocalDateTime modifiedOn;
-
     private String modifiedBy;
 
-    public Long getMergeId() {
-        return mergeId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMergeId(Long mergeId) {
-        this.mergeId = mergeId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public PolicyMaster getPolicyMaster() {
-        return policyMaster;
+    public String getPolicyNumber() {
+        return policyNumber;
     }
 
-    public void setPolicyMaster(PolicyMaster policyMaster) {
-        this.policyMaster = policyMaster;
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
     }
 
-    public MphMaster getMphMaster() {
-        return mphMaster;
+    public String getPolicyType() {
+        return policyType;
     }
 
-    public void setMphMaster(MphMaster mphMaster) {
-        this.mphMaster = mphMaster;
+    public void setPolicyType(String policyType) {
+        this.policyType = policyType;
     }
 
     public Boolean getIsActive() {
@@ -67,28 +49,12 @@ public class PolicyLevelMergerTemp {
         this.isActive = isActive;
     }
 
-    public LocalDateTime getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(LocalDateTime createdOn) {
-        this.createdOn = createdOn;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getModifiedOn() {
-        return modifiedOn;
-    }
-
-    public void setModifiedOn(LocalDateTime modifiedOn) {
-        this.modifiedOn = modifiedOn;
     }
 
     public String getModifiedBy() {
@@ -98,4 +64,5 @@ public class PolicyLevelMergerTemp {
     public void setModifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
     }
+
 }

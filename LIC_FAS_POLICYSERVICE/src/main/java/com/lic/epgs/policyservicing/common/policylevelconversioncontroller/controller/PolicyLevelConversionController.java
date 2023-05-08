@@ -1,27 +1,26 @@
 package com.lic.epgs.policyservicing.common.policylevelconversioncontroller.controller;
 
-import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.entity.PolicyServiceNotesTempEntity;
-import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.service.SavePolicyConversionNotes_PolicyLevelConversionControllerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.model.PolicyServiceNotes;
+import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.service.PolicyServiceNotesService;
 
 @RestController
-@RequestMapping("/policyLevelConversionController")
+@RequestMapping("/api/policylevelconversioncontroller")
 public class PolicyLevelConversionController {
 
     @Autowired
-    private SavePolicyConversionNotes_PolicyLevelConversionControllerService savePolicyConversionNotes_PolicyLevelConversionControllerService;
+    private PolicyServiceNotesService policyServiceNotesService;
 
-    @GetMapping("/getNotes/{policyId}")
-    public Optional<PolicyServiceNotesTempEntity> getNotesByPolicyId(@PathVariable String policyId) {
-        return savePolicyConversionNotes_PolicyLevelConversionControllerService.getPolicyServiceNotesTempEntityByPolicyId(policyId);
-    }
-
-    @PostMapping("/saveNotes")
-    public PolicyServiceNotesTempEntity saveNotes(@RequestBody PolicyServiceNotesTempEntity policyServiceNotesTempEntity) {
-        return savePolicyConversionNotes_PolicyLevelConversionControllerService.savePolicyServiceNotesTempEntity(policyServiceNotesTempEntity);
+    @GetMapping("/notes/{serviceId}")
+    public List<PolicyServiceNotes> getNotesDetailsList_PolicyLevelConversionController(@PathVariable Long serviceId) {
+        return policyServiceNotesService.getNotesDetailsList_PolicyLevelConversionController(serviceId);
     }
 
 }

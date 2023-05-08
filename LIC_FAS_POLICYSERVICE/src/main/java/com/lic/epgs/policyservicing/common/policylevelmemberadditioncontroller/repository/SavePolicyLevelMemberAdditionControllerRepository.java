@@ -1,31 +1,23 @@
 @Repository
 public interface SavePolicyLevelMemberAdditionControllerRepository {
 
-  // Save policy service member details
-  public void savePolicyServiceMemberDetails(Map<String, Object> policyServiceMemberDetails);
+    void savePolicyServiceMemberDetails(String personalDetails, String addressDetails, String bankDetails,
+                                       String nomineeDetails, String appointeeDetails);
 
-  // Update policy service member details
-  public void updatePolicyServiceMemberDetails(Map<String, Object> policyServiceMemberDetails);
+    void savePolicyServiceMemberDetailsAsDraft(String personalDetails, String addressDetails, String bankDetails,
+                                              String nomineeDetails, String appointeeDetails, String memberAdditionID);
 
-  // Save policy service member details as draft
-  public void savePolicyServiceMemberDetailsAsDraft(Map<String, Object> policyServiceMemberDetails);
+    void savePolicyServiceMemberDetailsAsActive(String personalDetails, String addressDetails, String bankDetails,
+                                               String nomineeDetails, String appointeeDetails, String memberAdditionID);
 
-  // Save policy service member details as active
-  public void savePolicyServiceMemberDetailsAsActive(Map<String, Object> policyServiceMemberDetails);
+    void modifyAndUpdatePolicyServiceMemberDetails(String personalDetails, String addressDetails, String bankDetails,
+                                                   String nomineeDetails, String appointeeDetails, String memberAdditionID);
 
-  // Set member addition status as Draft Status
-  public void setMemberAdditionStatusAsDraftStatus(String memberAdditionId);
+    void saveUpdatedPolicyServiceMemberDetails();
 
-  // Set member addition status as Active Status
-  public void setMemberAdditionStatusAsActiveStatus(String memberAdditionId);
+    void viewUpdatedPolicyServiceMemberDetails();
 
-  // Get updated policy service member details
-  public Map<String, Object> getUpdatedPolicyServiceMemberDetails(String memberAdditionId);
+    void handleErrorsAndExceptions();
 
-  // Handle exceptions gracefully
-  public void handleExceptionsGracefully();
-
-  // Secure policy service member details
-  public void securePolicyServiceMemberDetails();
-
+    void securePolicyServiceMemberDetails();
 }

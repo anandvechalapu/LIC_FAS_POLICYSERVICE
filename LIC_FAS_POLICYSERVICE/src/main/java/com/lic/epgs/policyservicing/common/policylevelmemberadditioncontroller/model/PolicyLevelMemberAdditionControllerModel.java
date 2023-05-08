@@ -1,44 +1,85 @@
-package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model;
-
-import java.util.Date;
-
+@Entity
+@Table(name="POLICY_LEVEL_MEMBER_ADDITION")
+@Repository
 public class PolicyLevelMemberAdditionControllerModel {
 
-    private String memberAdditionId;
-    private String note;
-    private String createdBy;
-    private Date createdOn;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="MEMBER_ADDITION_ID")
+    private Long memberAdditionId;
 
-    public String getMemberAdditionId() {
+    @Column(name="PERSONAL_DETAILS")
+    private String personalDetails;
+
+    @Column(name="ADDRESS_DETAILS")
+    private String addressDetails;
+
+    @Column(name="BANK_DETAILS")
+    private String bankDetails;
+
+    @Column(name="NOMINEE_DETAILS")
+    private String nomineeDetails;
+
+    @Column(name="APPOINTEES_DETAILS")
+    private String appointeeDetails;
+
+    @Column(name="STATUS")
+    private String status;
+
+    public Long getMemberAdditionId() {
         return memberAdditionId;
     }
 
-    public void setMemberAdditionId(String memberAdditionId) {
+    public void setMemberAdditionId(Long memberAdditionId) {
         this.memberAdditionId = memberAdditionId;
     }
 
-    public String getNote() {
-        return note;
+    public String getPersonalDetails() {
+        return personalDetails;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setPersonalDetails(String personalDetails) {
+        this.personalDetails = personalDetails;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public String getAddressDetails() {
+        return addressDetails;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setAddressDetails(String addressDetails) {
+        this.addressDetails = addressDetails;
     }
 
-    public Date getCreatedOn() {
-        return createdOn;
+    public String getBankDetails() {
+        return bankDetails;
     }
 
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
+    public void setBankDetails(String bankDetails) {
+        this.bankDetails = bankDetails;
+    }
+
+    public String getNomineeDetails() {
+        return nomineeDetails;
+    }
+
+    public void setNomineeDetails(String nomineeDetails) {
+        this.nomineeDetails = nomineeDetails;
+    }
+
+    public String getAppointeeDetails() {
+        return appointeeDetails;
+    }
+
+    public void setAppointeeDetails(String appointeeDetails) {
+        this.appointeeDetails = appointeeDetails;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

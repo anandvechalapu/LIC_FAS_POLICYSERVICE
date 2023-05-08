@@ -1,40 +1,54 @@
-package com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.repository;
+OB) {
+        this.policyHolderDOB = policyHolderDOB;
+    }
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+    public String getPolicyHolderAddress() {
+        return policyHolderAddress;
+    }
 
-import com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.model.NotesDetails;
+    public void setPolicyHolderAddress(String policyHolderAddress) {
+        this.policyHolderAddress = policyHolderAddress;
+    }
 
-@Repository
-public interface GetnotesDetails_PolicyLevelFreeLookCancelControllerRepository extends JpaRepository<NotesDetails, Integer> {
+    public String getFreeLookCancellationDate() {
+        return freeLookCancellationDate;
+    }
 
-	List<NotesDetails> findByFreeLookId(int freeLookId);
+    public void setFreeLookCancellationDate(String freeLookCancellationDate) {
+        this.freeLookCancellationDate = freeLookCancellationDate;
+    }
+
+    public String getFreeLookCancellationReason() {
+        return freeLookCancellationReason;
+    }
+
+    public void setFreeLookCancellationReason(String freeLookCancellationReason) {
+        this.freeLookCancellationReason = freeLookCancellationReason;
+    }
 
 }
 
 package com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.controller;
 
-import java.util.List;
-
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.model.NotesDetails;
-import com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.service.GetnotesDetails_PolicyLevelFreeLookCancelControllerService;
+import com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.dto.FreeLookCancellationResponseDto;
+import com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.service.PolicyLevelFreeLookCancelControllerService;
 
 @RestController
-@RequestMapping("/policylevelfreelookcancelcontroller")
+@RequestMapping("/freeLookCancellation")
 public class PolicyLevelFreeLookCancelController {
-	
-	@Autowired
-	GetnotesDetails_PolicyLevelFreeLookCancelControllerService getnotesDetails_PolicyLevelFreeLookCancelControllerService;
-	
-	@GetMapping("/getNotesDetailsByFreeLookId/{freeLookId}")
-	public List<NotesDetails> getNotesDetailsByFreeLookId(@PathVariable int freeLookId) {
-		return getnotesDetails_PolicyLevelFreeLookCancelControllerService.getNotesDetailsByFreeLookId(freeLookId);
-	}
-	
+    
+    @Autowired
+    PolicyLevelFreeLookCancelControllerService policyLevelFreeLookCancelControllerService;
+
+    @GetMapping("/{freeLookCancellationId}")
+    public FreeLookCancellationResponseDto getFreeLookCancellationDetails(@PathVariable("freeLookCancellationId") Long freeLookCancellationId) {
+        return policyLevelFreeLookCancelControllerService.getFreeLookCancellationDetails(freeLookCancellationId);
+    }
 }

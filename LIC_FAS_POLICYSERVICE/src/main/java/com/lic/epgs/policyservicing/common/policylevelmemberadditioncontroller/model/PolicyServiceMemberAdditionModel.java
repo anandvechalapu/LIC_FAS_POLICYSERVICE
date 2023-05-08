@@ -1,47 +1,51 @@
-package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "policy_service_member_addition")
 public class PolicyServiceMemberAdditionModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberAdditionId;
-
-    @Column(name = "unit_code")
-    private String unitCode;
-
-    @Column(name = "member_addition_name")
-    private String memberAdditionName;
-
+    private List<PolicyServiceMbrDto> policyServiceMbrDtos;
+    private List<PolicyServiceMemberEntity> policyServiceMemberEntities;
+    private Boolean activeAddress;
+    private Boolean activeNominee;
+    
+    public PolicyServiceMemberAdditionModel(){
+        
+    }
+    
     public Long getMemberAdditionId() {
         return memberAdditionId;
     }
-
+    
     public void setMemberAdditionId(Long memberAdditionId) {
         this.memberAdditionId = memberAdditionId;
     }
-
-    public String getUnitCode() {
-        return unitCode;
+    
+    public List<PolicyServiceMbrDto> getPolicyServiceMbrDtos() {
+        return policyServiceMbrDtos;
     }
-
-    public void setUnitCode(String unitCode) {
-        this.unitCode = unitCode;
+    
+    public void setPolicyServiceMbrDtos(List<PolicyServiceMbrDto> policyServiceMbrDtos) {
+        this.policyServiceMbrDtos = policyServiceMbrDtos;
     }
-
-    public String getMemberAdditionName() {
-        return memberAdditionName;
+    
+    public List<PolicyServiceMemberEntity> getPolicyServiceMemberEntities() {
+        return policyServiceMemberEntities;
     }
-
-    public void setMemberAdditionName(String memberAdditionName) {
-        this.memberAdditionName = memberAdditionName;
+    
+    public void setPolicyServiceMemberEntities(List<PolicyServiceMemberEntity> policyServiceMemberEntities) {
+        this.policyServiceMemberEntities = policyServiceMemberEntities;
+    }
+    
+    public Boolean getActiveAddress() {
+        return activeAddress;
+    }
+    
+    public void setActiveAddress(Boolean activeAddress) {
+        this.activeAddress = activeAddress;
+    }
+    
+    public Boolean getActiveNominee() {
+        return activeNominee;
+    }
+    
+    public void setActiveNominee(Boolean activeNominee) {
+        this.activeNominee = activeNominee;
     }
 }

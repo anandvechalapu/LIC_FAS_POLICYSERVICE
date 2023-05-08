@@ -1,0 +1,19 @@
+package com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.dto.PolicyAddressOldDto;
+import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.dto.PolicyDtlsResponseDto;
+import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.repository.SaveAddressDetailsPolicyLevelDetailsChangeControllerRepository;
+
+@Service
+public class SaveAddressDetailsPolicyLevelDetailsChangeControllerService {
+	
+	@Autowired
+	private SaveAddressDetailsPolicyLevelDetailsChangeControllerRepository saveAddressDetailsPolicyLevelDetailsChangeControllerRepository;
+	
+	public PolicyDtlsResponseDto saveAddressDetails(PolicyAddressOldDto mphAddressNewDto) throws IllegalArgumentException {
+		return saveAddressDetailsPolicyLevelDetailsChangeControllerRepository.saveAddressDetails(mphAddressNewDto);
+	}
+}

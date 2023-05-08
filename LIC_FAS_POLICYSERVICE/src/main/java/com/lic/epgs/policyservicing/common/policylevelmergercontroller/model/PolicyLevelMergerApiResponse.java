@@ -1,66 +1,166 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.model;
 
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class PolicyLevelMergerApiResponse {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private Long mergeId;
+    private String policyNumber;
+    private String displayName;
+    private String mergeStatus;
 
-  private List<PolicyServiceNotesDto> notes;
-  private String transactionStatus;
-  private String transactionMessage;
+    public Long getId() {
+        return id;
+    }
 
-  public List<PolicyServiceNotesDto> getNotes() {
-    return notes;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setNotes(List<PolicyServiceNotesDto> notes) {
-    this.notes = notes;
-  }
+    public Long getMergeId() {
+        return mergeId;
+    }
 
-  public String getTransactionStatus() {
-    return transactionStatus;
-  }
+    public void setMergeId(Long mergeId) {
+        this.mergeId = mergeId;
+    }
 
-  public void setTransactionStatus(String transactionStatus) {
-    this.transactionStatus = transactionStatus;
-  }
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
 
-  public String getTransactionMessage() {
-    return transactionMessage;
-  }
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
+    }
 
-  public void setTransactionMessage(String transactionMessage) {
-    this.transactionMessage = transactionMessage;
-  }
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getMergeStatus() {
+        return mergeStatus;
+    }
+
+    public void setMergeStatus(String mergeStatus) {
+        this.mergeStatus = mergeStatus;
+    }
+
 }
 
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.model;
 
-public class PolicyServiceNotesDto {
-  private Long noteId;
-  private Long mergeId;
-  private String noteText;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-  public Long getNoteId() {
-    return noteId;
-  }
+@Entity
+public class PolicyLevelMergerDto {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private Long mergeId;
+    private String policyNumber;
+    private String displayName;
+    private String policyType;
+    private String policyTerm;
+    private String policyStatus;
+    private String policyHolderName;
+    private String policyHolderType;
+    private String policyPremium;
 
-  public void setNoteId(Long noteId) {
-    this.noteId = noteId;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public Long getMergeId() {
-    return mergeId;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setMergeId(Long mergeId) {
-    this.mergeId = mergeId;
-  }
+    public Long getMergeId() {
+        return mergeId;
+    }
 
-  public String getNoteText() {
-    return noteText;
-  }
+    public void setMergeId(Long mergeId) {
+        this.mergeId = mergeId;
+    }
 
-  public void setNoteText(String noteText) {
-    this.noteText = noteText;
-  }
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getPolicyType() {
+        return policyType;
+    }
+
+    public void setPolicyType(String policyType) {
+        this.policyType = policyType;
+    }
+
+    public String getPolicyTerm() {
+        return policyTerm;
+    }
+
+    public void setPolicyTerm(String policyTerm) {
+        this.policyTerm = policyTerm;
+    }
+
+    public String getPolicyStatus() {
+        return policyStatus;
+    }
+
+    public void setPolicyStatus(String policyStatus) {
+        this.policyStatus = policyStatus;
+    }
+
+    public String getPolicyHolderName() {
+        return policyHolderName;
+    }
+
+    public void setPolicyHolderName(String policyHolderName) {
+        this.policyHolderName = policyHolderName;
+    }
+
+    public String getPolicyHolderType() {
+        return policyHolderType;
+    }
+
+    public void setPolicyHolderType(String policyHolderType) {
+        this.policyHolderType = policyHolderType;
+    }
+
+    public String getPolicyPremium() {
+        return policyPremium;
+    }
+
+    public void setPolicyPremium(String policyPremium) {
+        this.policyPremium = policyPremium;
+    }
+
 }
+
+package

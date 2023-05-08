@@ -1,38 +1,32 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.controller;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerDto;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.service.PolicyLevelMergerService;
-import org.springframework.http.HttpStatus;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyResponseDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.SearchParametersDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.service.NewcitrieaSearchPolicyLevelMergerControllerService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/policyLevelMerger")
+@Api(value = "Policy Level Merger Controller")
 public class PolicyLevelMergerController {
 
-    private PolicyLevelMergerService policyLevelMergerService;
+    @Autowired
+    NewcitrieaSearchPolicyLevelMergerControllerService newcitrieaSearchPolicyLevelMergerControllerService;
 
-    public PolicyLevelMergerController(PolicyLevelMergerService policyLevelMergerService) {
-        this.policyLevelMergerService = policyLevelMergerService;
+    @ApiOperation(value = "Search for policy level", notes = "Search for policy level using citriea search.")
+    @PostMapping("/v1/search/policy-level")
+    public ResponseEntity<PolicyResponseDto> citrieaSearch(
+            @ApiParam(value = "Search parameters for citriea search.", required = true) @Valid @RequestBody SearchParametersDto searchParameters
+    ) {
+        return newcitrieaSearchPolicyLevelMergerControllerService.citrieaSearch(searchParameters);
     }
 
-    @PutMapping("/updateStatus")
-    public ResponseEntity<Void> updateStatus(@RequestBody Boolean status, @RequestParam String modifiedBy, @RequestParam Long id) {
-        policyLevelMergerService.updateStatus(status, modifiedBy, id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping("/saveAndUpdatePolicyLevelMerger")
-    public ResponseEntity<Void> saveAndUpdatePolicyLevelMerger(@RequestBody PolicyLevelMergerDto policyLevelMergerDto, @RequestBody PolicyLevelMergerApiResponse response) {
-        policyLevelMergerService.saveAndUpdatePolicyLevelMerger(policyLevelMergerDto, response);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/validPolicyNumberAndType")
-    public ResponseEntity<Boolean> validPolicyNumberAndType(@RequestParam String policyNumber, @RequestParam String policyType) {
-        return new ResponseEntity<>(policyLevelMergerService.validPolicyNumberAndType(policyNumber, policyType), HttpStatus.OK);
-    }
 }

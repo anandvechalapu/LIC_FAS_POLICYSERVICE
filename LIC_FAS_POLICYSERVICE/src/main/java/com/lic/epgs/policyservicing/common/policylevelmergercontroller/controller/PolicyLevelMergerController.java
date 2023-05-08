@@ -1,14 +1,19 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerTempEntity;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyServiceNotesDto;
 
 @Repository
-public interface PolicyLevelMergerRepository extends JpaRepository<PolicyLevelMergerTempEntity, Long> {
+public interface PolicyLevelMergerControllerRepository extends JpaRepository<PolicyServiceNotesDto, Long> {
 
-    PolicyLevelMergerTempEntity getPolicyMergebyMergeId_PolicyLevelMergerController(Long mergeId);
+  @Query("SELECT n FROM PolicyServiceNotesDto n WHERE n.mergeId = ?1")
+  List<PolicyServiceNotesDto> getNoteList(long mergeId);
+
 }
 
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.controller;
@@ -16,22 +21,19 @@ package com.lic.epgs.policyservicing.common.policylevelmergercontroller.controll
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerTempEntity;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.service.PolicyLevelMergerService;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.service.PolicyLevelMergerControllerService;
 
 @RestController
-@RequestMapping("/policylevelmerge")
 public class PolicyLevelMergerController {
-	
-	@Autowired
-	PolicyLevelMergerService policyLevelMergerService;
-	
-	@GetMapping(value="/{mergeId}")
-	public PolicyLevelMergerTempEntity getPolicyMergebyMergeId_PolicyLevelMergerController(@PathVariable Long mergeId){
-		return policyLevelMergerService.getPolicyMergebyMergeId_PolicyLevelMergerController(mergeId);
-	}
+  
+  @Autowired
+  private PolicyLevelMergerControllerService policyLevelMergerControllerService;
 
+  @GetMapping("/policies/{mergeId}/notes")
+  public PolicyLevelMergerApiResponse getNoteList(@PathVariable long mergeId) {
+    return policyLevelMergerControllerService.getNoteList(mergeId);
+  }
 }

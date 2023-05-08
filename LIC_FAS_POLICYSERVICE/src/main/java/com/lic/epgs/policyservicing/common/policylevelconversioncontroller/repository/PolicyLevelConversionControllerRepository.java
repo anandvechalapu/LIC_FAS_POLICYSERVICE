@@ -1,9 +1,12 @@
+package com.lic.epgs.policyservicing.common.policylevelconversioncontroller.repository;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.model.Document;
+import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.dto.PolicyLevelConversionDto;
 
-public interface PolicyLevelConversionControllerRepository extends JpaRepository<Document, Long>{
+@Repository
+public interface PolicyLevelConversionControllerRepository extends JpaRepository<PolicyLevelConversionDto, Long> {
 
-    public List<Document> getDocumentList(Long conversionId);
-
+    PolicyLevelConversionDto savePolicyConversionDetails(PolicyLevelConversionDto policyLevelConversionDto);
 }

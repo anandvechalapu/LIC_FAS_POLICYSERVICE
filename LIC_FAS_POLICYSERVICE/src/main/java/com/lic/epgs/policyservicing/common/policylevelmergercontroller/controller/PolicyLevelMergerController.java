@@ -1,27 +1,35 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.controller;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyServiceNotesDto;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.service.GetNoteListPolicyLevelMergerControllerService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyServiceNotesDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.service.PolicyLevelMergerService;
+
 @RestController
-@RequestMapping("/api/v1/policylevelmerger")
 public class PolicyLevelMergerController {
+    
+    @Autowired
+    PolicyLevelMergerService policyLevelMergerService;
 
-  @Autowired private GetNoteListPolicyLevelMergerControllerService getNoteListPolicyLevelMergerControllerService;
+    @GetMapping("/merge/{mergeId}/master")
+    public PolicyLevelMergerApiResponse getMasterPolicyMergebyMergeId(@PathVariable Long mergeId) {
+        return policyLevelMergerService.getMasterPolicyMergebyMergeId(mergeId);
+    }
 
-  @GetMapping("/{mergeId}")
-  public ResponseEntity<List<PolicyServiceNotesDto>> getNoteListByMergeId(@PathVariable Long mergeId) {
-    List<PolicyServiceNotesDto> notesDtoList = getNoteListPolicyLevelMergerControllerService.findAllByMergeId(mergeId);
-    return ResponseEntity.ok(notesDtoList);
-  }
+    @GetMapping("/merge/{mergeId}")
+    public PolicyLevelMergerDto findByMergeId(@PathVariable Long mergeId) {
+        return policyLevelMergerService.findByMergeId(mergeId);
+    }
 
+    @GetMapping("/merge/{mergeId}/notes")
+    public List<PolicyServiceNotesDto> findByMergeIdAndIsActive(@PathVariable Long mergeId, Boolean isActive) {
+        return policyLevelMergerService.findByMergeIdAndIsActive(mergeId, isActive);
+    }
 }

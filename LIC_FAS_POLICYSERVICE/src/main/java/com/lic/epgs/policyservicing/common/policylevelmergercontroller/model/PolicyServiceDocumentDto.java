@@ -4,29 +4,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "policyservicedocumentdto")
 public class PolicyServiceDocumentDto {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long documentId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	private Boolean isActive;
+	private String documentName;
+	
+	private boolean isActive;
 
-	public Long getDocumentId() {
-		return documentId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDocumentId(Long documentId) {
-		this.documentId = documentId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Boolean getIsActive() {
+	public String getDocumentName() {
+		return documentName;
+	}
+
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
+
+	public boolean isActive() {
 		return isActive;
 	}
 
-	public void setIsActive(Boolean isActive) {
+	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 	

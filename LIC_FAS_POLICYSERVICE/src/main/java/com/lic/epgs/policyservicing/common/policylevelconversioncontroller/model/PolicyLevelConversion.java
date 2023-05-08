@@ -1,22 +1,19 @@
 package com.lic.epgs.policyservicing.common.policylevelconversioncontroller.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
-@Table(name = "policy_level_conversion")
 public class PolicyLevelConversion {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    private String unitCode;
     private String policyNumber;
-
-    private String oldLevel;
-
-    private String newLevel;
-
-    private String userId;
+    private String conversionStatus;
+    private String role;
+    private Date modifiedDate;
 
     public Long getId() {
         return id;
@@ -24,6 +21,14 @@ public class PolicyLevelConversion {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUnitCode() {
+        return unitCode;
+    }
+
+    public void setUnitCode(String unitCode) {
+        this.unitCode = unitCode;
     }
 
     public String getPolicyNumber() {
@@ -34,27 +39,27 @@ public class PolicyLevelConversion {
         this.policyNumber = policyNumber;
     }
 
-    public String getOldLevel() {
-        return oldLevel;
+    public String getConversionStatus() {
+        return conversionStatus;
     }
 
-    public void setOldLevel(String oldLevel) {
-        this.oldLevel = oldLevel;
+    public void setConversionStatus(String conversionStatus) {
+        this.conversionStatus = conversionStatus;
     }
 
-    public String getNewLevel() {
-        return newLevel;
+    public String getRole() {
+        return role;
     }
 
-    public void setNewLevel(String newLevel) {
-        this.newLevel = newLevel;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public String getUserId() {
-        return userId;
+    public Date getModifiedDate() {
+        return modifiedDate;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 }

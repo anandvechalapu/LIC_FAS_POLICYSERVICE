@@ -1,47 +1,45 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
 
-@Entity
-@Table(name = "policyservicedocumentdto")
+import org.springframework.http.ResponseEntity;
+
 public class PolicyServiceDocumentDto {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String documentName;
-	
-	private boolean isActive;
 
-	public Long getId() {
-		return id;
-	}
+    private String documentId;
+    private String documentName;
+    private String documentType;
+    private List<String> documentContent;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getDocumentId() {
+        return documentId;
+    }
 
-	public String getDocumentName() {
-		return documentName;
-	}
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
 
-	public void setDocumentName(String documentName) {
-		this.documentName = documentName;
-	}
+    public String getDocumentName() {
+        return documentName;
+    }
 
-	public boolean isActive() {
-		return isActive;
-	}
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-	
-	
+    public String getDocumentType() {
+        return documentType;
+    }
 
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public List<String> getDocumentContent() {
+        return documentContent;
+    }
+
+    public void setDocumentContent(List<String> documentContent) {
+        this.documentContent = documentContent;
+    }
 }

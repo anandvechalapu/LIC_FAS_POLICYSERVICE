@@ -1,0 +1,11 @@
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.model.PolicyLevelDetailsChangeController_PolicyLevelDetailsChangeController;
+
+public interface PolicyLevelDetailsChangeController_PolicyLevelDetailsChangeControllerRepository extends JpaRepository<PolicyLevelDetailsChangeController_PolicyLevelDetailsChangeController, Long> {
+
+    public PolicyLevelDetailsChangeController_PolicyLevelDetailsChangeController findByPolicyNumberAndPolicyDetailsId(String policyNumber, Long policyDetailsId);
+
+    public PolicyLevelDetailsChangeController_PolicyLevelDetailsChangeController save(PolicyLevelDetailsChangeController_PolicyLevelDetailsChangeController policyLevelDetailsChangeController);
+
+}

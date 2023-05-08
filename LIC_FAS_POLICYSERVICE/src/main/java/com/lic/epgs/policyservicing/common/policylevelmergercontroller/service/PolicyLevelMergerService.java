@@ -1,11 +1,13 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.service;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerDto;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerTemp;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository.PolicyLevelMergerRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerSearchDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.entity.PolicyLevelMergerEntity;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository.PolicyLevelMergerRepository;
 
 @Service
 public class PolicyLevelMergerService {
@@ -13,16 +15,12 @@ public class PolicyLevelMergerService {
     @Autowired
     private PolicyLevelMergerRepository policyLevelMergerRepository;
 
-    public void updateStatus(Boolean status, String modifiedBy, Long id) {
-        policyLevelMergerRepository.updateStatus(status, modifiedBy, id);
+    public List<PolicyLevelMergerSearchDto> getExistingCriteriaSearchPolicy(String policyNumber, String product, String lineOfBusiness, Integer mergeStatus, String unitCode, String mphCode, String mphName) {
+        return policyLevelMergerRepository.getExistingCriteriaSearchPolicy(policyNumber, product, lineOfBusiness, mergeStatus, unitCode, mphCode, mphName);
+    }
+    
+    public PolicyLevelMergerEntity save(PolicyLevelMergerEntity entity) {
+        return policyLevelMergerRepository.save(entity);
     }
 
-    public void saveAndUpdatePolicyLevelMerger(PolicyLevelMergerDto policyLevelMergerDto,
-                                               PolicyLevelMergerApiResponse response) {
-        policyLevelMergerRepository.saveAndUpdatePolicyLevelMerger(policyLevelMergerDto, response);
-    }
-
-    public boolean validPolicyNumberAndType(String policyNumber, String policyType) {
-        return policyLevelMergerRepository.validPolicyNumberAndType(policyNumber, policyType);
-    }
 }

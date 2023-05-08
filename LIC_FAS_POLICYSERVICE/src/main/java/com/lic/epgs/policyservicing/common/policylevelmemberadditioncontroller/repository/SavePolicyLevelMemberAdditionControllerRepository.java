@@ -1,19 +1,20 @@
 @Repository
-public interface SavePolicyLevelMemberAdditionControllerRepository {
+public interface SavePolicyLevelMemberAdditionControllerRepository extends JpaRepository<SavePolicyLevelMemberAdditionController, Long>{
 
-    // Method to save policy service member details
-    public PolicyServiceMember save(PolicyServiceMember policyServiceMember);
+   SavePolicyLevelMemberAdditionController save(SavePolicyLevelMemberAdditionController savePolicyLevelMemberAdditionController);
 
-    // Method to update policy service member details
-    public PolicyServiceMember update(PolicyServiceMember policyServiceMember);
+   SavePolicyLevelMemberAdditionController saveAndFlush(SavePolicyLevelMemberAdditionController savePolicyLevelMemberAdditionController);
 
-    // Method to check if component name is valid or not
-    public boolean isValidComponentName(String componentName);
+   void delete(SavePolicyLevelMemberAdditionController savePolicyLevelMemberAdditionController);
 
-    // Method to set member addition status as Draft Status
-    public void setDraftStatus();
+   boolean existsByComponentName(String componentName);
 
-    // Method to set member addition status as Active Status
-    public void setActiveStatus();
+   SavePolicyLevelMemberAdditionController findByComponentName(String componentName);
+
+   SavePolicyLevelMemberAdditionController findByMemberAdditionId(String memberAdditionId);
+
+   void deleteByComponentName(String componentName);
+
+   void deleteByMemberAdditionId(String memberAdditionId);
 
 }

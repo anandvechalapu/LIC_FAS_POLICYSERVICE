@@ -1,28 +1,24 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerApiResponse;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerSearchDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerTemp;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface PolicyLevelMergerRepository extends JpaRepository<PolicyLevelMergerSearchDto, Long>, JpaSpecificationExecutor<PolicyLevelMergerSearchDto> {
+import javax.transaction.Transactional;
 
-    @Query("SELECT p FROM PolicyLevelMergerSearchDto p "
-            + "WHERE (:policyNumber IS NULL OR p.policyNumber = :policyNumber) "
-            + "AND (:product IS NULL OR p.product = :product) "
-            + "AND (:lineOfBusiness IS NULL OR p.lineOfBusiness = :lineOfBusiness) "
-            + "AND (:mergeStatus IS NULL OR p.mergeStatus = :mergeStatus) "
-            + "AND (:unitCode IS NULL OR p.unitCode = :unitCode) "
-            + "AND (:mphCode IS NULL OR p.mphCode = :mphCode) "
-            + "AND (:mphName IS NULL OR p.mphName = :mphName) "
-            + "ORDER BY p.modifiedDate DESC")
-    PolicyLevelMergerApiResponse getCriteriaSearchPolicy(@Param("policyNumber") String policyNumber,
-                                                        @Param("product") String product,
-                                                        @Param("lineOfBusiness") String lineOfBusiness,
-                                                        @Param("mergeStatus") String mergeStatus,
-                                                        @Param("unitCode") String unitCode,
-                                                        @Param("mphCode") String mphCode,
-                                                        @Param("mphName") String mphName);
+public interface PolicyLevelMergerRepository extends JpaRepository<PolicyLevelMergerTemp, Long> {
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE PolicyLevelMergerTemp SET isActive = :status, modifiedBy = :modifiedBy WHERE id = :id")
+    void updateStatus(@Param("status") Boolean status, @Param("modifiedBy") String modifiedBy, @Param("id") Long id);
+
+    void saveAndUpdatePolicyLevelMerger(PolicyLevelMergerDto policyLevelMergerDto, PolicyLevelMergerApiResponse response);
+
+    boolean validPolicyNumberAndType(String policyNumber, String policyType);
+
 }

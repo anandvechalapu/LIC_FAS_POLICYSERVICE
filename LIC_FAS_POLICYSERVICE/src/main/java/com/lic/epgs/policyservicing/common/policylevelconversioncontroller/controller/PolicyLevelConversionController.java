@@ -1,32 +1,26 @@
-@Repository
-public interface PolicyCriteriaSearchPolicyLevelConversionControllerRepository extends 
-JpaRepository<PolicyCriteriaSearchPolicyLevelConversionController, Long> {
-    
-    Optional<PolicyCriteriaSearchPolicyLevelConversionController> findByPolicyNo(String policyNo);
-    
-}
+package com.lic.epgs.policyservicing.common.policylevelconversioncontroller.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.dto.PolicyLevelConversionDto;
+import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.service.PolicyLevelConversionControllerService;
 
 @RestController
-@RequestMapping("/policylevelconversioncontroller")
-@Transactional
+@RequestMapping("/policyLevelConversionController")
 public class PolicyLevelConversionController {
 
-    private final PolicyCriteriaSearchPolicyLevelConversionControllerService policyCriteriaSearchPolicyLevelConversionControllerService;
-
-    public PolicyLevelConversionController(PolicyCriteriaSearchPolicyLevelConversionControllerService policyCriteriaSearchPolicyLevelConversionControllerService) {
-        this.policyCriteriaSearchPolicyLevelConversionControllerService = policyCriteriaSearchPolicyLevelConversionControllerService;
+    @Autowired
+    private PolicyLevelConversionControllerService policyLevelConversionControllerService;
+    
+    @PostMapping("/savePolicyConversionDetails")
+    public PolicyLevelConversionDto savePolicyConversionDetails(@RequestBody @Valid PolicyLevelConversionDto policyLevelConversionDto) {
+        return policyLevelConversionControllerService.savePolicyConversionDetails(policyLevelConversionDto);
     }
-
-    @GetMapping("/{policyNo}")
-    public ResponseEntity<Optional<PolicyCriteriaSearchPolicyLevelConversionController>> findByPolicyNo(@PathVariable String policyNo) {
-        Optional<PolicyCriteriaSearchPolicyLevelConversionController> policyCriteriaSearchPolicyLevelConversionController = policyCriteriaSearchPolicyLevelConversionControllerService.findByPolicyNo(policyNo);
-        return ResponseEntity.ok(policyCriteriaSearchPolicyLevelConversionController);
-    }
-
-    @PostMapping
-    public ResponseEntity<PolicyCriteriaSearchPolicyLevelConversionController> save(@RequestBody PolicyCriteriaSearchPolicyLevelConversionController policyCriteriaSearchPolicyLevelConversionController) {
-        PolicyCriteriaSearchPolicyLevelConversionController savedPolicyCriteriaSearchPolicyLevelConversionController = policyCriteriaSearchPolicyLevelConversionControllerService.save(policyCriteriaSearchPolicyLevelConversionController);
-        return ResponseEntity.ok(savedPolicyCriteriaSearchPolicyLevelConversionController);
-    }
-
+    
 }

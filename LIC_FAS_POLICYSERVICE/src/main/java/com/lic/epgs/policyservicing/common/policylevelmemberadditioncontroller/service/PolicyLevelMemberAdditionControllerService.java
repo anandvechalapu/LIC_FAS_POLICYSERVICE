@@ -1,25 +1,18 @@
 package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.service;
 
-import java.util.Optional;
-
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.CommonResponseDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.dto.PolicyServiceMemberAdditionDto;
+import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository.PolicyLevelFreeLookCancelControllerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.model.PolicyLevelMemberAdditionController;
-import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository.PolicyLevelMemberAdditionControllerRepository;
 
 @Service
 public class PolicyLevelMemberAdditionControllerService {
 
     @Autowired
-    private PolicyLevelMemberAdditionControllerRepository repository;
+    PolicyLevelFreeLookCancelControllerRepository policyLevelFreeLookCancelControllerRepository;
 
-    public Optional<Long> getMaxLicenseId(){
-        return repository.getMaxLicenseId();
+    public CommonResponseDto searchPolicyMemberAddition(PolicyServiceMemberAdditionDto policyServiceMemberAdditionDto) {
+        return policyLevelFreeLookCancelControllerRepository.criteriaSearch(policyServiceMemberAdditionDto);
     }
-
-    public Optional<PolicyLevelMemberAdditionController> findByLicenseId(Long licenseId){
-        return repository.findByLicenseId(licenseId);
-    }
-
 }

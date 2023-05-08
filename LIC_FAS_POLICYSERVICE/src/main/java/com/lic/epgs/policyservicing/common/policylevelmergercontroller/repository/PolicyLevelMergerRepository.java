@@ -1,24 +1,18 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerDto;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerTemp;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.entity.PolicyLevelMergerEntity;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerSearchDto;
 
-public interface PolicyLevelMergerRepository extends JpaRepository<PolicyLevelMergerTemp, Long> {
-
-    @Transactional
-    @Modifying
-    @Query("UPDATE PolicyLevelMergerTemp SET isActive = :status, modifiedBy = :modifiedBy WHERE id = :id")
-    void updateStatus(@Param("status") Boolean status, @Param("modifiedBy") String modifiedBy, @Param("id") Long id);
-
-    void saveAndUpdatePolicyLevelMerger(PolicyLevelMergerDto policyLevelMergerDto, PolicyLevelMergerApiResponse response);
-
-    boolean validPolicyNumberAndType(String policyNumber, String policyType);
+@Repository
+public interface PolicyLevelMergerRepository extends JpaRepository<PolicyLevelMergerEntity, Long> {
+    
+    @Query("SELECT p FROM PolicyLevelMergerEntity p WHERE p.policyNumber = :policyNumber AND p.product = :product AND p.lineOfBusiness = :lineOfBusiness AND p.mergeStatus = :mergeStatus AND p.unitCode = :unitCode AND p.mphCode = :mphCode AND p.mphName = :mphName AND p.isActive = true ORDER BY modifiedOn DESC")
+    List<PolicyLevelMergerSearchDto> getExistingCriteriaSearchPolicy(String policyNumber, String product, String lineOfBusiness, Integer mergeStatus, String unitCode, String mphCode, String mphName);
 
 }

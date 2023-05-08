@@ -1,3 +1,4 @@
+//Model class
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.model;
 
 import javax.persistence.Entity;
@@ -7,125 +8,98 @@ import javax.persistence.Id;
 
 @Entity
 public class PolicyLevelMergerTempEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long mergeId;
-    
-    private String firstName;
-    private String lastName;
-    private String policyNumber;
-    private String policyType;
-    private String policyStatus;
-    private String address;
-    private String city;
-    private String state;
-    private String zipCode;
-    private String country;
-    private String email;
-    private String phone;
-    
+    private String policyId;
+    private String parentPolicyId;
+    private String source;
+    private String status;
+    private String createdBy;
+    private String modifiedBy;
+    private String createdDate;
+    private String modifiedDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getMergeId() {
         return mergeId;
     }
-    
+
     public void setMergeId(Long mergeId) {
         this.mergeId = mergeId;
     }
-    
-    public String getFirstName() {
-        return firstName;
+
+    public String getPolicyId() {
+        return policyId;
     }
-    
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+
+    public void setPolicyId(String policyId) {
+        this.policyId = policyId;
     }
-    
-    public String getLastName() {
-        return lastName;
+
+    public String getParentPolicyId() {
+        return parentPolicyId;
     }
-    
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+
+    public void setParentPolicyId(String parentPolicyId) {
+        this.parentPolicyId = parentPolicyId;
     }
-    
-    public String getPolicyNumber() {
-        return policyNumber;
+
+    public String getSource() {
+        return source;
     }
-    
-    public void setPolicyNumber(String policyNumber) {
-        this.policyNumber = policyNumber;
+
+    public void setSource(String source) {
+        this.source = source;
     }
-    
-    public String getPolicyType() {
-        return policyType;
+
+    public String getStatus() {
+        return status;
     }
-    
-    public void setPolicyType(String policyType) {
-        this.policyType = policyType;
+
+    public void setStatus(String status) {
+        this.status = status;
     }
-    
-    public String getPolicyStatus() {
-        return policyStatus;
+
+    public String getCreatedBy() {
+        return createdBy;
     }
-    
-    public void setPolicyStatus(String policyStatus) {
-        this.policyStatus = policyStatus;
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
-    
-    public String getAddress() {
-        return address;
+
+    public String getModifiedBy() {
+        return modifiedBy;
     }
-    
-    public void setAddress(String address) {
-        this.address = address;
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
-    
-    public String getCity() {
-        return city;
+
+    public String getCreatedDate() {
+        return createdDate;
     }
-    
-    public void setCity(String city) {
-        this.city = city;
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
-    
-    public String getState() {
-        return state;
+
+    public String getModifiedDate() {
+        return modifiedDate;
     }
-    
-    public void setState(String state) {
-        this.state = state;
+
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
-    
-    public String getZipCode() {
-        return zipCode;
-    }
-    
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-    
-    public String getCountry() {
-        return country;
-    }
-    
-    public void setCountry(String country) {
-        this.country = country;
-    }
-    
-    public String getEmail() {
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    public String getPhone() {
-        return phone;
-    }
-    
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+
 }

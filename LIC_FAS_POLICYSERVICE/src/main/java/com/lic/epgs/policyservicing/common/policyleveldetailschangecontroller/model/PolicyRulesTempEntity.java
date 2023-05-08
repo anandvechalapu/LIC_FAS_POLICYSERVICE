@@ -1,9 +1,6 @@
 package com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class PolicyRulesTempEntity {
@@ -11,12 +8,15 @@ public class PolicyRulesTempEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String rulesData;
-    private String rulesName;
-    private String policyLevel;
-    private String createdBy;
-    private String updatedBy;
-    private Long version;
+
+    private Long policyId;
+
+    private String ruleName;
+
+    private String ruleValue;
+
+    public PolicyRulesTempEntity() {
+    }
 
     public Long getId() {
         return id;
@@ -26,119 +26,105 @@ public class PolicyRulesTempEntity {
         this.id = id;
     }
 
-    public String getRulesData() {
-        return rulesData;
+    public Long getPolicyId() {
+        return policyId;
     }
 
-    public void setRulesData(String rulesData) {
-        this.rulesData = rulesData;
+    public void setPolicyId(Long policyId) {
+        this.policyId = policyId;
     }
 
-    public String getRulesName() {
-        return rulesName;
+    public String getRuleName() {
+        return ruleName;
     }
 
-    public void setRulesName(String rulesName) {
-        this.rulesName = rulesName;
+    public void setRuleName(String ruleName) {
+        this.ruleName = ruleName;
     }
 
-    public String getPolicyLevel() {
-        return policyLevel;
+    public String getRuleValue() {
+        return ruleValue;
     }
 
-    public void setPolicyLevel(String policyLevel) {
-        this.policyLevel = policyLevel;
+    public void setRuleValue(String ruleValue) {
+        this.ruleValue = ruleValue;
     }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
 }
 
-public class PolicyRulesDto {
+package com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.model;
 
-    private Long id;
-    private String rulesData;
-    private String rulesName;
-    private String policyLevel;
-    private String createdBy;
-    private String updatedBy;
-    private Long version;
+import java.util.List;
 
-    public Long getId() {
-        return id;
+public class PolicyDtlsResponseDto {
+
+    private String transactionStatus;
+
+    private String transactionMessage;
+
+    private List<PolicyRulesOldDto> policyRulesOldDtoList;
+
+    public PolicyDtlsResponseDto() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getTransactionStatus() {
+        return transactionStatus;
     }
 
-    public String getRulesData() {
-        return rulesData;
+    public void setTransactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 
-    public void setRulesData(String rulesData) {
-        this.rulesData = rulesData;
+    public String getTransactionMessage() {
+        return transactionMessage;
     }
 
-    public String getRulesName() {
-        return rulesName;
+    public void setTransactionMessage(String transactionMessage) {
+        this.transactionMessage = transactionMessage;
     }
 
-    public void setRulesName(String rulesName) {
-        this.rulesName = rulesName;
+    public List<PolicyRulesOldDto> getPolicyRulesOldDtoList() {
+        return policyRulesOldDtoList;
     }
 
-    public String getPolicyLevel() {
-        return policyLevel;
+    public void setPolicyRulesOldDtoList(List<PolicyRulesOldDto> policyRulesOldDtoList) {
+        this.policyRulesOldDtoList = policyRulesOldDtoList;
+    }
+}
+
+package com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.model;
+
+public class PolicyRulesOldDto {
+
+    private Long policyId;
+
+    private String ruleName;
+
+    private String ruleValue;
+
+    public PolicyRulesOldDto() {
     }
 
-    public void setPolicyLevel(String policyLevel) {
-        this.policyLevel = policyLevel;
+    public Long getPolicyId() {
+        return policyId;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public void setPolicyId(Long policyId) {
+        this.policyId = policyId;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public String getRuleName() {
+        return ruleName;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public void setRuleName(String ruleName) {
+        this.ruleName = ruleName;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public String getRuleValue() {
+        return ruleValue;
     }
 
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
+    public void setRuleValue(String ruleValue) {
+        this.ruleValue = ruleValue;
     }
 }

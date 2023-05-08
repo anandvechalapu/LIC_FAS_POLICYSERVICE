@@ -1,28 +1,25 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.service;
 
-import java.util.List;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerApiResponse;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerSearchDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository.PolicyLevelMergerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerDto;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyServiceNotesDto;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository.PolicyLevelMergerRepository;
 
 @Service
 public class PolicyLevelMergerService {
 
     @Autowired
-    PolicyLevelMergerRepository policyLevelMergerRepository;
+    private PolicyLevelMergerRepository policyLevelMergerRepository;
 
-    public PolicyLevelMergerApiResponse getMasterPolicyMergebyMergeId(Long mergeId){
-        return policyLevelMergerRepository.getMasterPolicyMergebyMergeId(mergeId);
+    public PolicyLevelMergerApiResponse getCriteriaSearchPolicy(String policyNumber,
+                                                               String product,
+                                                               String lineOfBusiness,
+                                                               String mergeStatus,
+                                                               String unitCode,
+                                                               String mphCode,
+                                                               String mphName) {
+        return policyLevelMergerRepository.getCriteriaSearchPolicy(policyNumber, product, lineOfBusiness, mergeStatus, unitCode, mphCode, mphName);
     }
 
-    public PolicyLevelMergerDto findByMergeId(Long mergeId){
-        return policyLevelMergerRepository.findByMergeId(mergeId);
-    }
-
-    public List<PolicyServiceNotesDto> findByMergeIdAndIsActive(Long mergeId, Boolean isActive){
-        return policyLevelMergerRepository.findByMergeIdAndIsActive(mergeId, isActive);
-    }
 }

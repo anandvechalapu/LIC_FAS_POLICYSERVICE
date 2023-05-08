@@ -1,12 +1,11 @@
 @Repository
 public interface PolicyLevelMergerControllerRepository {
- 
+   
     /**
-     * Get Document List for the given merge ID
+     * Get a list of policy documents for a given merge ID.
      *
-     * @param mergeId
-     * @return ResponseEntity containing a list of PolicyServiceDocumentDto objects associated with the given merge ID
+     * @param mergeId The ID of the policy merge.
+     * @return A list of PolicyServiceDocumentDto objects, or an empty list if no documents are found.
      */
-    ResponseEntity<List<PolicyServiceDocumentDto>> getDocumentList(String mergeId);
- 
+    List<PolicyServiceDocumentDto> getDocumentList(Long mergeId);
 }

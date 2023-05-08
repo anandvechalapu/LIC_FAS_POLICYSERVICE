@@ -1,55 +1,32 @@
 package com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.service;
 
-import org.springframework.stereotype.Service;
 import com.lic.epgs.policyservicing.common.policylevelmemberadditioncontroller.repository.SavePolicyLevelMemberAdditionControllerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SavePolicyLevelMemberAdditionControllerService {
 
-    private final SavePolicyLevelMemberAdditionControllerRepository savePolicyLevelMemberAdditionControllerRepository;
+    @Autowired
+    private SavePolicyLevelMemberAdditionControllerRepository savePolicyLevelMemberAdditionControllerRepository;
 
-    public SavePolicyLevelMemberAdditionControllerService(SavePolicyLevelMemberAdditionControllerRepository savePolicyLevelMemberAdditionControllerRepository) {
-        this.savePolicyLevelMemberAdditionControllerRepository = savePolicyLevelMemberAdditionControllerRepository;
+    public PolicyServiceMember save(PolicyServiceMember policyServiceMember) {
+        return savePolicyLevelMemberAdditionControllerRepository.save(policyServiceMember);
     }
 
-    public void savePolicyServiceMemberDetails(String personalDetails, String addressDetails, String bankDetails,
-                                               String nomineeDetails, String appointeeDetails) {
-        savePolicyLevelMemberAdditionControllerRepository.savePolicyServiceMemberDetails(personalDetails, addressDetails, bankDetails,
-                                                                                        nomineeDetails, appointeeDetails);
+    public PolicyServiceMember update(PolicyServiceMember policyServiceMember) {
+        return savePolicyLevelMemberAdditionControllerRepository.update(policyServiceMember);
     }
 
-    public void savePolicyServiceMemberDetailsAsDraft(String personalDetails, String addressDetails, String bankDetails,
-                                                      String nomineeDetails, String appointeeDetails, String memberAdditionID) {
-        savePolicyLevelMemberAdditionControllerRepository.savePolicyServiceMemberDetailsAsDraft(personalDetails, addressDetails, bankDetails,
-                                                                                               nomineeDetails, appointeeDetails, memberAdditionID);
+    public boolean isValidComponentName(String componentName) {
+        return savePolicyLevelMemberAdditionControllerRepository.isValidComponentName(componentName);
     }
 
-    public void savePolicyServiceMemberDetailsAsActive(String personalDetails, String addressDetails, String bankDetails,
-                                                       String nomineeDetails, String appointeeDetails, String memberAdditionID) {
-        savePolicyLevelMemberAdditionControllerRepository.savePolicyServiceMemberDetailsAsActive(personalDetails, addressDetails, bankDetails,
-                                                                                                nomineeDetails, appointeeDetails, memberAdditionID);
+    public void setDraftStatus() {
+        savePolicyLevelMemberAdditionControllerRepository.setDraftStatus();
     }
 
-    public void modifyAndUpdatePolicyServiceMemberDetails(String personalDetails, String addressDetails, String bankDetails,
-                                                          String nomineeDetails, String appointeeDetails, String memberAdditionID) {
-        savePolicyLevelMemberAdditionControllerRepository.modifyAndUpdatePolicyServiceMemberDetails(personalDetails, addressDetails, bankDetails,
-                                                                                                   nomineeDetails, appointeeDetails, memberAdditionID);
+    public void setActiveStatus() {
+        savePolicyLevelMemberAdditionControllerRepository.setActiveStatus();
     }
-
-    public void saveUpdatedPolicyServiceMemberDetails() {
-        savePolicyLevelMemberAdditionControllerRepository.saveUpdatedPolicyServiceMemberDetails();
-    }
-
-    public void viewUpdatedPolicyServiceMemberDetails() {
-        savePolicyLevelMemberAdditionControllerRepository.viewUpdatedPolicyServiceMemberDetails();
-    }
-
-    public void handleErrorsAndExceptions() {
-        savePolicyLevelMemberAdditionControllerRepository.handleErrorsAndExceptions();
-    }
-
-    public void securePolicyServiceMemberDetails() {
-        savePolicyLevelMemberAdditionControllerRepository.securePolicyServiceMemberDetails();
-    }
-
 }

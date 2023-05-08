@@ -7,98 +7,59 @@ import javax.persistence.Id;
 
 @Entity
 public class FreeLookCancellationResponseDto {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private Long freeLookId;
+	
+	private Long policyId;
+	
+	private Long serviceId;
+	
+	private String notesText;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String role;
-    private String policyNumber;
-    private String mphCode;
-    private String mphName;
-    private String dateRange;
-    private String product;
-    private String lob;
-    private String freeLookStatus;
-    private String unitCode;
+	public Long getId() {
+		return id;
+	}
 
-	// Getters and Setters for all the fields
-    public long getId() {
-        return id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public Long getFreeLookId() {
+		return freeLookId;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public void setFreeLookId(Long freeLookId) {
+		this.freeLookId = freeLookId;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public Long getPolicyId() {
+		return policyId;
+	}
 
-    public String getPolicyNumber() {
-        return policyNumber;
-    }
+	public void setPolicyId(Long policyId) {
+		this.policyId = policyId;
+	}
 
-    public void setPolicyNumber(String policyNumber) {
-        this.policyNumber = policyNumber;
-    }
+	public Long getServiceId() {
+		return serviceId;
+	}
 
-    public String getMphCode() {
-        return mphCode;
-    }
+	public void setServiceId(Long serviceId) {
+		this.serviceId = serviceId;
+	}
 
-    public void setMphCode(String mphCode) {
-        this.mphCode = mphCode;
-    }
+	public String getNotesText() {
+		return notesText;
+	}
 
-    public String getMphName() {
-        return mphName;
-    }
+	public void setNotesText(String notesText) {
+		this.notesText = notesText;
+	}
+	
+	
 
-    public void setMphName(String mphName) {
-        this.mphName = mphName;
-    }
-
-    public String getDateRange() {
-        return dateRange;
-    }
-
-    public void setDateRange(String dateRange) {
-        this.dateRange = dateRange;
-    }
-
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public String getLob() {
-        return lob;
-    }
-
-    public void setLob(String lob) {
-        this.lob = lob;
-    }
-
-    public String getFreeLookStatus() {
-        return freeLookStatus;
-    }
-
-    public void setFreeLookStatus(String freeLookStatus) {
-        this.freeLookStatus = freeLookStatus;
-    }
-
-    public String getUnitCode() {
-        return unitCode;
-    }
-
-    public void setUnitCode(String unitCode) {
-        this.unitCode = unitCode;
-    }
 }

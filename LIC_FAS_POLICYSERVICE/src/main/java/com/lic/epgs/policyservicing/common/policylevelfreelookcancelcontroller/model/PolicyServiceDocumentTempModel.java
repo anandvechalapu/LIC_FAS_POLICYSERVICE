@@ -2,32 +2,37 @@ package com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="policy_service_document_temp")
+@Table(name = "policyservicedocument_temps")
 public class PolicyServiceDocumentTempModel {
 
-    @Column(name="document_id")
-    private Long documentId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "document_id")
+    private long documentId;
 
-    @Column(name="document_name")
+    @Column(name = "document_name")
     private String documentName;
 
-    @Column(name="document_type")
+    @Column(name = "document_type")
     private String documentType;
 
-    @Column(name="document_status")
+    @Column(name = "document_path")
+    private String documentPath;
+
+    @Column(name = "document_status")
     private String documentStatus;
 
-    @Column(name="document_location")
-    private String documentLocation;
-
-    public Long getDocumentId() {
+    public long getDocumentId() {
         return documentId;
     }
 
-    public void setDocumentId(Long documentId) {
+    public void setDocumentId(long documentId) {
         this.documentId = documentId;
     }
 
@@ -47,6 +52,14 @@ public class PolicyServiceDocumentTempModel {
         this.documentType = documentType;
     }
 
+    public String getDocumentPath() {
+        return documentPath;
+    }
+
+    public void setDocumentPath(String documentPath) {
+        this.documentPath = documentPath;
+    }
+
     public String getDocumentStatus() {
         return documentStatus;
     }
@@ -54,13 +67,4 @@ public class PolicyServiceDocumentTempModel {
     public void setDocumentStatus(String documentStatus) {
         this.documentStatus = documentStatus;
     }
-
-    public String getDocumentLocation() {
-        return documentLocation;
-    }
-
-    public void setDocumentLocation(String documentLocation) {
-        this.documentLocation = documentLocation;
-    }
-
 }

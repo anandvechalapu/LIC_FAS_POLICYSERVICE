@@ -1,44 +1,29 @@
-package com.lic.epgs.policyservicing.common.policylevelconversioncontroller.repository;
-
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-
-import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.model.PolicyLevelConversion;
-
-@Repository
-public interface GetInprogressPolicyConversionDetailsList_PolicyLevelConversionControllerRepository extends JpaRepository<PolicyLevelConversion, Long> {
-
-    @Query("SELECT p FROM PolicyLevelConversion p WHERE p.role = (:role) AND p.unitCode = (:unitCode) AND p.conversionStatus = 'Inprogress'")
-    List<PolicyLevelConversion> getInprogressPolicyConversionDetailsList(String role, String unitCode);
-    
-}
-
 package com.lic.epgs.policyservicing.common.policylevelconversioncontroller.controller;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.model.PolicyLevelConversion;
-import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.service.GetInprogressPolicyConversionDetailsList_PolicyLevelConversionControllerService;
+import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.entity.PolicyLevelConversionTempEntity;
+import com.lic.epgs.policyservicing.common.policylevelconversioncontroller.service.SendToChecker_PolicyLevelConversionControllerService;
 
 @RestController
-@RequestMapping("/policylevelconversion")
 public class PolicyLevelConversionController {
 
     @Autowired
-    private GetInprogressPolicyConversionDetailsList_PolicyLevelConversionControllerService service;
+    private SendToChecker_PolicyLevelConversionControllerService sendToChecker_PolicyLevelConversionControllerService;
 
-    @GetMapping("/getInprogressPolicyConversionDetailsList")
-    public List<PolicyLevelConversion> getInprogressPolicyConversionDetailsList(@RequestParam String role, @RequestParam String unitCode) {
-        return service.getInprogressPolicyConversionDetailsList(role, unitCode);
+    @GetMapping("/policyLevelConversion/{conversionId}")
+    public PolicyLevelConversionTempEntity getByConversionId(@PathVariable String conversionId) {
+        return sendToChecker_PolicyLevelConversionControllerService.findByConversionId(conversionId);
+    }
+
+    @PostMapping("/policyLevelConversion/save")
+    public PolicyLevelConversionTempEntity save(@RequestBody PolicyLevelConversionTempEntity policyLevelConversionTempEntity) {
+        return sendToChecker_PolicyLevelConversionControllerService.saveAndFlush(policyLevelConversionTempEntity);
     }
 
 }

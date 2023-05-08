@@ -1,41 +1,111 @@
-// Entity/Model Class
 package com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.model;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.entity.FreeLookCancellationEntity;
+import com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.dto.MphBankDto;
 
 @Entity
-@Table(name = "FreeLookCancellation")
-public class FreeLookCancellation {
+public class FreeLookCancellation implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    private Long freeLookId;
-    private String policyNumber;
-    private String status;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Long getFreeLookId() {
-        return freeLookId;
+    private String policyNo;
+
+    private String customerId;
+
+    private String policyHolderName;
+
+    private String productName;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "policy_master_id")
+    private PolicyMaster policyMaster;
+
+    @OneToMany(mappedBy = "freeLookCancellation")
+    private List<MphBankDto> mphBankDtos;
+
+    public FreeLookCancellation() {
     }
 
-    public void setFreeLookId(Long freeLookId) {
-        this.freeLookId = freeLookId;
+    public FreeLookCancellation(FreeLookCancellationEntity freeLookCancellationEntity) {
+        this.id = freeLookCancellationEntity.getId();
+        this.policyNo = freeLookCancellationEntity.getPolicyNo();
+        this.customerId = freeLookCancellationEntity.getCustomerId();
+        this.policyHolderName = freeLookCancellationEntity.getPolicyHolderName();
+        this.productName = freeLookCancellationEntity.getProductName();
+        this.policyMaster = freeLookCancellationEntity.getPolicyMaster();
+        this.mphBankDtos = freeLookCancellationEntity.getMphBankDtos();
     }
 
-    public String getPolicyNumber() {
-        return policyNumber;
+    public Long getId() {
+        return id;
     }
 
-    public void setPolicyNumber(String policyNumber) {
-        this.policyNumber = policyNumber;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getPolicyNo() {
+        return policyNo;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPolicyNo(String policyNo) {
+        this.policyNo = policyNo;
     }
 
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getPolicyHolderName() {
+        return policyHolderName;
+    }
+
+    public void setPolicyHolderName(String policyHolderName) {
+        this.policyHolderName = policyHolderName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public PolicyMaster getPolicyMaster() {
+        return policyMaster;
+    }
+
+    public void setPolicyMaster(PolicyMaster policyMaster) {
+        this.policyMaster = policyMaster;
+    }
+
+    public List<MphBankDto> getMphBankDtos() {
+        return mphBankDtos;
+    }
+
+    public void setMphBankDtos(List<MphBankDto> mphBankDtos) {
+        this.mphBankDtos = mphBankDtos;
+    }
 }

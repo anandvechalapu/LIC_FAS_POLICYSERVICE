@@ -1,65 +1,65 @@
 package com.lic.epgs.policyservicing.common.policylevelfreelookcancelcontroller.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.time.Instant;
 
-@Entity
 public class FreeLookCancellationResponseDto {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private Long freeLookId;
-	
-	private Long policyId;
-	
-	private Long serviceId;
-	
-	private String notesText;
+    
+    private CommonDto commonDto;
+    private PolicyBankOldDto policyBankOldDto;
+    private String transactionStatus;
+    private String transactionMessage;
+    private Instant startTime;
+    private Instant endTime;
 
-	public Long getId() {
-		return id;
-	}
+    // Getters and Setters
+    
+    public CommonDto getCommonDto() {
+        return commonDto;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setCommonDto(CommonDto commonDto) {
+        this.commonDto = commonDto;
+    }
 
-	public Long getFreeLookId() {
-		return freeLookId;
-	}
+    public PolicyBankOldDto getPolicyBankOldDto() {
+        return policyBankOldDto;
+    }
 
-	public void setFreeLookId(Long freeLookId) {
-		this.freeLookId = freeLookId;
-	}
+    public void setPolicyBankOldDto(PolicyBankOldDto policyBankOldDto) {
+        this.policyBankOldDto = policyBankOldDto;
+    }
 
-	public Long getPolicyId() {
-		return policyId;
-	}
+    public String getTransactionStatus() {
+        return transactionStatus;
+    }
 
-	public void setPolicyId(Long policyId) {
-		this.policyId = policyId;
-	}
+    public void setTransactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
 
-	public Long getServiceId() {
-		return serviceId;
-	}
+    public String getTransactionMessage() {
+        return transactionMessage;
+    }
 
-	public void setServiceId(Long serviceId) {
-		this.serviceId = serviceId;
-	}
+    public void setTransactionMessage(String transactionMessage) {
+        this.transactionMessage = transactionMessage;
+    }
 
-	public String getNotesText() {
-		return notesText;
-	}
+    public Instant getStartTime() {
+        return startTime;
+    }
 
-	public void setNotesText(String notesText) {
-		this.notesText = notesText;
-	}
-	
-	
+    public void setStartTime(Instant startTime) {
+        this.startTime = startTime;
+    }
 
+    public Instant getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Instant endTime) {
+        this.endTime = endTime;
+    }
+    
+    
 }

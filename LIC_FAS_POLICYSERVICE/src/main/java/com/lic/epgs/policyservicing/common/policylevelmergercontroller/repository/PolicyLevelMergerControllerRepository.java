@@ -1,18 +1,19 @@
-package com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
 import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyServiceNotesDto;
-import org.springframework.data.repository.Repository;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyServiceNotesTempEntity;
 
-public interface PolicyLevelMergerControllerRepository extends Repository<PolicyServiceNotesTempRepository, Long> {
-
-  /**
-   * This method retrieves the list of notes associated with a specific merge ID.
-   * 
-   * @param mergeId the merge ID of the notes to be retrieved.
-   * @return a PolicyLevelMergerApiResponse object with a list of PolicyServiceNotesDto objects containing the notes, as well as a transaction status and message.
-   */
-  PolicyLevelMergerApiResponse getNoteList(long mergeId);
-
+@Repository
+public interface PolicyLevelMergerControllerRepository extends JpaRepository<PolicyServiceNotesTempEntity, Integer> {
+	
+	// Method to save the PolicyServiceNotesDto object to the database as PolicyServiceNotesTempEntity with isActive set to true.
+	public PolicyServiceNotesTempEntity saveNotedPolicyMeger(PolicyServiceNotesDto policyServiceNotesDto);
+	
+	// Method to validate that the mergeId is not null or equal to 0.
+	public PolicyLevelMergerApiResponse validateMergeId(int mergeId);
+	
+	// Method to check if there exists a policy level merger with the given mergeId and isActive true.
+	public PolicyLevelMergerApiResponse checkMergeIdExists(int mergeId);
 }

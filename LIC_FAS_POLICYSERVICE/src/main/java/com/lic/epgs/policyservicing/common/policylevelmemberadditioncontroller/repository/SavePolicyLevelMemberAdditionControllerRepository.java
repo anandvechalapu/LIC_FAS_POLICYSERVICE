@@ -1,23 +1,19 @@
 @Repository
 public interface SavePolicyLevelMemberAdditionControllerRepository {
 
-    void savePolicyServiceMemberDetails(String personalDetails, String addressDetails, String bankDetails,
-                                       String nomineeDetails, String appointeeDetails);
+    // Method to save policy service member details
+    public PolicyServiceMember save(PolicyServiceMember policyServiceMember);
 
-    void savePolicyServiceMemberDetailsAsDraft(String personalDetails, String addressDetails, String bankDetails,
-                                              String nomineeDetails, String appointeeDetails, String memberAdditionID);
+    // Method to update policy service member details
+    public PolicyServiceMember update(PolicyServiceMember policyServiceMember);
 
-    void savePolicyServiceMemberDetailsAsActive(String personalDetails, String addressDetails, String bankDetails,
-                                               String nomineeDetails, String appointeeDetails, String memberAdditionID);
+    // Method to check if component name is valid or not
+    public boolean isValidComponentName(String componentName);
 
-    void modifyAndUpdatePolicyServiceMemberDetails(String personalDetails, String addressDetails, String bankDetails,
-                                                   String nomineeDetails, String appointeeDetails, String memberAdditionID);
+    // Method to set member addition status as Draft Status
+    public void setDraftStatus();
 
-    void saveUpdatedPolicyServiceMemberDetails();
+    // Method to set member addition status as Active Status
+    public void setActiveStatus();
 
-    void viewUpdatedPolicyServiceMemberDetails();
-
-    void handleErrorsAndExceptions();
-
-    void securePolicyServiceMemberDetails();
 }

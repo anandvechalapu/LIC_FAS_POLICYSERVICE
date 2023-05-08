@@ -1,32 +1,25 @@
 package com.lic.epgs.policyservicing.common.policylevelmergercontroller.service;
 
-import java.util.Optional;
-
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerApiResponse;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.dto.PolicyLevelMergerSearchDto;
+import com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository.PolicyLevelMergerControllerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerApiResponse;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.model.PolicyLevelMergerTempEntity;
-import com.lic.epgs.policyservicing.common.policylevelmergercontroller.repository.PolicyLevelMergerControllerRepository;
+import java.util.List;
 
 @Service
 public class PolicyLevelMergerControllerService {
 
-	@Autowired
-	private PolicyLevelMergerControllerRepository policyLevelMergerControllerRepository;
+    @Autowired
+    PolicyLevelMergerControllerRepository policyLevelMergerControllerRepository;
 
-	public PolicyLevelMergerApiResponse getPolicyMergebyMergeId(Long mergeId) {
-		Optional<PolicyLevelMergerTempEntity> policyLevelMergerTempEntity = policyLevelMergerControllerRepository.findById(mergeId);
-		if (policyLevelMergerTempEntity.isPresent()) {
-			PolicyLevelMergerApiResponse policyLevelMergerApiResponse = new PolicyLevelMergerApiResponse();
-			PolicyLevelMergerTempEntity policyLevelMergerTempEntityData = policyLevelMergerTempEntity.get();
-			policyLevelMergerApiResponse.setMergeId(policyLevelMergerTempEntityData.getMergeId());
-			policyLevelMergerApiResponse.setResponseCode(policyLevelMergerTempEntityData.getResponseCode());
-			policyLevelMergerApiResponse.setResponseMessage(policyLevelMergerTempEntityData.getResponseMessage());
+    public List<PolicyLevelMergerSearchDto> getCriteriaSearchPolicy(String policyNumber, String product, String lineOfBusiness, String mergeStatus, String unitCode, String mphCode, String mphName){
+        return policyLevelMergerControllerRepository.getCriteriaSearchPolicy(policyNumber, product, lineOfBusiness, mergeStatus, unitCode, mphCode, mphName);
+    }
 
-			return policyLevelMergerApiResponse;
-		} else {
-			return null;
-		}
-	}
+    public PolicyLevelMergerApiResponse save(PolicyLevelMergerApiResponse policyLevelMergerApiResponse){
+        return policyLevelMergerControllerRepository.save(policyLevelMergerApiResponse);
+    }
+
 }

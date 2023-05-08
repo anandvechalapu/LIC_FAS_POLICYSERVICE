@@ -3,11 +3,13 @@ package com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.r
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.entity.PolicyServiceNotesTempEntity;
+import com.lic.epgs.policyservicing.common.policyleveldetailschangecontroller.model.PolicyServiceNotesTempEntity;
 
 @Repository
-public interface PolicyServiceNotesTempRepo extends JpaRepository<PolicyServiceNotesTempEntity, Long> {
-  
-  public PolicyServiceNotesTempEntity findByPolicyIdAndServiceId(Long policyId, Long serviceId);
-  
+public interface SaveNotesDetails_PolicyLevelDetailsChangeControllerRepo extends JpaRepository<PolicyServiceNotesTempEntity, Integer> {
+	
+	public PolicyServiceNotesTempEntity save(PolicyServiceNotesTempEntity policyServiceNotesTempEntity);
+	
+	public PolicyServiceNotesTempEntity findByPolicyId(Integer policyId);
+
 }

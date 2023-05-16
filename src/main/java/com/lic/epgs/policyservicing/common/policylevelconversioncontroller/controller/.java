@@ -1,10 +1,13 @@
-Now, let's create the Spring Boot Controller class with the following steps:
+Step 12: Create a new package named com.lic.epgs.policyservicing.common.policylevelconversioncontroller.controller.
 
-1. Create a package with the name com.lic.epgs.policyservicing.common.policylevelconversioncontroller.controller
-2. Create a Controller class with the name PolicyLevelConversionController
-3. Autowire the Service class into the Controller class
-4. Add the required methods to the Controller class
-5. Add the necessary request mappings and annotations 
-6. Build and run the project.
+Step 13: Create the Spring Boot Controller class.
 
-Finally, we have successfully generated the Spring Boot Controller class for the given Service class.
+Step 14: Annotate the Controller class with @RestController and @RequestMapping.
+
+Step 15: Autowire the Service class in the Controller class.
+
+Step 16: Create necessary methods for the controller class.
+
+Step 17: Build the project and test the code.
+
+Step 18: Deploy the project.

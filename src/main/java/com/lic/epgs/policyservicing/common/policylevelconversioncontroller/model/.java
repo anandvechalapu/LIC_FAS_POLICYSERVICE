@@ -1,6 +1,7 @@
-9. Create an Entity class with the name PolicyLevelConversionControllerModel and package name com.lic.epgs.policyservicing.common.policylevelconversioncontroller.model
-10. Add the required fields to the Entity class.
-11. Add the required constructors, getters and setters to the Entity class.
-12. Add the required annotations to the Entity class.
-13. Configure the JPA settings for the Entity class.
-14. Build and run the project.
+Step 6: Create a new package named com.lic.epgs.policyservicing.common.policylevelconversioncontroller.model
+
+Step 7: Create the Entity/Model class with the required fields.
+
+Step 8: Annotate the fields with the relevant JPA annotations.
+
+Step 9: Build the project and test the code.

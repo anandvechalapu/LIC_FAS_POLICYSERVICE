@@ -1,12 +1,11 @@
 Solution:
 
-Maven can be used to create a Spring Boot project with the following steps:
+Step 1: Create a new project in the Maven.
 
-1. Create a Maven project in your IDE
-2. Add the Spring Boot Starter Parent dependency to the project
-3. Add the Spring Boot web and data dependencies to the project
-4. Configure the project properties
-5. Configure the build plugins
-6. Generate the Repository package with the name com.lic.epgs.policyservicing.common.policylevelconversioncontroller.repository
-7. Add the required methods to the repository
-8. Build and run the project.
+Step 2: Add the required dependencies in the pom.xml file.
+
+Step 3: Create a new package named com.lic.epgs.policyservicing.common.policylevelconversioncontroller.repository
+
+Step 4: Create the repository classes with the required methods.
+
+Step 5: Build the project and test the code.

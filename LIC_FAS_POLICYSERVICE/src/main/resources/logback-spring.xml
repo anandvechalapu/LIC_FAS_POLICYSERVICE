@@ -51,5 +51,5 @@
     </springProfile>
 
     <logger name="org.springframework" level="INFO"/>
-    <logger name="com.lic.epgs.common" level="DEBUG"/>
+    <logger name="com.lic.epgs" level="DEBUG"/>
 </configuration>

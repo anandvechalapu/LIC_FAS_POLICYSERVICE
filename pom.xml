@@ -8,14 +8,14 @@
 		<version>2.7.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.lic.epgs.policyservicing.common.policylevelconversioncontroller</groupId>
-	<artifactId>SAC-661</artifactId>
+	<groupId>com.lic.epgs</groupId>
+	<artifactId>SAC-615</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>POLICYSERVICE</name>
-	<description>POLICYSERVICE</description>
+	<name>LIC_FAS_POLICYSERVICE</name>
+	<description>LIC_FAS_POLICYSERVICE</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
